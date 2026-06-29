@@ -39,8 +39,6 @@ const lora = Lora({
   preload: true,
 });
 
-
-
 export const metadata: Metadata = {
   title: "NoWhere Isle",
   description:
@@ -92,13 +90,13 @@ export default function RootLayout({
       lang="en"
       className={`${keaniaOne.variable} ${lilex.variable} ${lilitaOne.variable} ${lora.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        {/* <Preloader /> */}
+      <body className="min-h-full flex flex-col bg-black">
+        <Preloader />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="min-h-screen w-full bg-[--color-background] relative overflow-hidden">
             {/* Rose Spotlight Background */}
             <div
-              className="absolute inset-0 z-0 pointer-events-none"
+              className="fixed inset-0 z-0 pointer-events-none"
               style={{
                 background: `
         radial-gradient(

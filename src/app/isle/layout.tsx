@@ -1,4 +1,5 @@
 import Navbar from "@/components/menus/navbar";
+import Footer from "@/components/menus/footer";
 import Image from "next/image";
 
 export default function RootLayout({
@@ -19,6 +20,7 @@ export default function RootLayout({
 
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );

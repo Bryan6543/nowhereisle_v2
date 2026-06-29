@@ -23,21 +23,24 @@
   position: relative;
 }
 
-/* .font-1 {
-  font-family: var(--font-keania);
+.scale-animation-hero {
+  animation-name: scale;
+  animation-duration: 80000ms;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 
-.font-2 {
-  font-family: var(--font-lilex);
+@keyframes scale {
+  0% {
+    scale: 100%;
+  }
+  50% {
+    scale: 150%;
+  }
+  100% {
+    scale: 100%;
+  }
 }
-
-.font-3 {
-  font-family: var(--font-lilita-one);
-}
-
-.font-4 {
-  font-family: var(--font-lora);
-} */
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -235,12 +238,12 @@
 
   .big_head {
     font-family: var(--font-keania);
-    font-size: clamp(24px, 7vw, 64px);
+    font-size: clamp(48px, 7vw, 96px);
   }
 
   .head {
     font-family: var(--font-lilita);
-    font-size: clamp(36px, 7vw, 96px);
+    font-size: clamp(36px, 7vw, 64px);
     line-height: 1.1;
   }
 
