@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import FadeInSection from "@/hooks/FadeInSection";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -128,7 +129,7 @@ export default function Home() {
     gsap
       .timeline({
         scrollTrigger: {
-          trigger: "#section2",
+          trigger: ".s2_SliderContainer",
           start: "top 45%",
           end: "center 50%",
           // scrub: 1,
@@ -149,9 +150,10 @@ export default function Home() {
         },
       );
     // groundLayer
-    gsap.timeline({
+    gsap
+      .timeline({
         scrollTrigger: {
-          trigger: "#section2",
+          trigger: ".s2_SliderContainer",
           start: "top 40%",
           end: "center 50%",
           // scrub: 1,
@@ -279,16 +281,13 @@ export default function Home() {
       {/* Section 2 - Nowhere Isle Introduction */}
       <section className="relative h-auto lg:h-[80vh] overflow-hidden flex">
         {/* Overlay */}
-        <div
-          id="section2"
-          className="overlay-logo bg-black w-full h-full flex justify-center items-center z-10 absolute"
-        >
+        <div className="s2_SliderContainer overlay-logo bg-black w-full h-full flex justify-center items-center z-10 absolute">
           <Image
             src={"/logo.png"}
             width={613}
             height={500}
             alt="nowhere_isle_game_studio_logo"
-            className="h-1/2 object-contain m-auto"
+            className="h-1/3 object-contain m-auto"
           />
         </div>
         {/* Layer ground */}
@@ -300,20 +299,20 @@ export default function Home() {
               width={613}
               height={500}
               alt="nowhere_isle_game_studio_logo"
-              className="max-h-40 w-fit object-contain"
+              className="h-[clamp(120px,100vh,200px)]  w-fit object-contain"
             />
             <h1 className="big_head">
               NO WHER ISLE <br /> GAME STUDIO
             </h1>
           </div>
           {/* Text Area */}
-          <div className="body_text space-y-10">
-            <p className="s2_lg_dsc max-w-4xl">
+          <div className="s2_lg_desc body_text space-y-10">
+            <p className="max-w-4xl">
               We are an independent game studio building atmospheric strategy
               games with strong identity, intricate lore, meaningful tactical
               systems, and underlying mystery.
             </p>
-            <div className="s2_lg_fct flex flex-col gap-4 md:flex-row md:gap-10">
+            <div className="s2_lg_fct flex flex-col justify-center items-center gap-4 md:flex-row md:gap-10">
               <div className="flex gap-5">
                 <p>Established</p>
                 <p className="text-green-600">2025</p>
@@ -356,15 +355,18 @@ export default function Home() {
       {/* Section 3 - A World in the Making */}
       <section>
         <div className="w-[80%] m-auto flex flex-col gap-10 py-[clamp(50px,1vh,240px)]">
-          <div className="flex flex-col gap-2.5">
+          <FadeInSection className="flex flex-col gap-2.5">
             <h1 className="head">A World In The Making</h1>
             <p className="body_text md:w-4xl">
               Lead the seventh doomed Inquisition expedition into corrupted
               territory and fight to reclaim the Lost Holy Capital of Maylon.
             </p>
-          </div>
+          </FadeInSection>
           <div className="md:relative md:block grid grid-cols-1 grid-rows-2 gap-2.5 md:gap-0">
-            <div className="md:col-start-1 md:row-start-1">
+            <FadeInSection
+              direction="left"
+              className="md:col-start-1 md:row-start-1"
+            >
               <Image
                 src={"/img-3.png"}
                 width={1000}
@@ -372,8 +374,11 @@ export default function Home() {
                 alt=""
                 className="w-[clamp(250px,100vw,850px)] shadow-2xl rounded-2xl"
               />
-            </div>
-            <div className="md:col-start-2 md:row-start-2 2xl:pb-50">
+            </FadeInSection>
+            <FadeInSection
+              direction="right"
+              className="md:col-start-2 md:row-start-2 2xl:pb-50"
+            >
               <Image
                 src={"/img-2.png"}
                 width={1000}
@@ -381,14 +386,14 @@ export default function Home() {
                 alt=""
                 className="w-[clamp(250px,100vw,850px)] shadow-2xl rounded-2xl 2xl:absolute 2xl:translate-x-[clamp(150px,100vw,600px)] 2xl:-translate-y-50"
               />
-            </div>
+            </FadeInSection>
           </div>
           <div className="flex flex-col gap-8">
-            <div>
+            <FadeInSection direction="left">
               <h1 className="massive_shead">SIGIL TACTICS</h1>
               <h1 className="massive_bhead">LOST MAYLON</h1>
-            </div>
-            <div className="flex gap-8 opacity-75">
+            </FadeInSection>
+            <FadeInSection className="flex gap-8 opacity-75">
               <Image
                 src={"/icons/kick.png"}
                 alt="Kick"
@@ -403,8 +408,8 @@ export default function Home() {
                 height={85}
                 className="w-[clamp(56px,100vw,71px)]"
               />
-            </div>
-            <div
+            </FadeInSection>
+            <FadeInSection
               className="flex z-90 gap-2 items-center relative cursor-pointer hover:opacity-70 hover:font-black transition-all duration-500 py-2"
               onClick={() => setIsActive(!isActive)}
               onMouseEnter={() => setIsActive(true)}
@@ -421,7 +426,7 @@ export default function Home() {
                             ${isActive ? "w-40 translate-y-5 -translate-x-39 rotate-0" : "w-2.5 translate-y-0.5 -rotate-200"}`}
                 />
               </div>
-            </div>
+            </FadeInSection>
           </div>
         </div>
       </section>
@@ -429,21 +434,40 @@ export default function Home() {
       {/* Section 4 - Meet Souls you will lead into darkness */}
       <section>
         <div className="w-[80%] m-auto flex flex-col gap-10 py-[clamp(50px,1vh,240px)]">
-          <div className="flex flex-col gap-3">
+          <FadeInSection className="flex flex-col gap-4">
             <h1 className="head">Meet the souls you will lead into darkness</h1>
-            <p className="body_text md:w-2xl">
+            <p className="body_text md:w-xl">
               A specialized trio of Inquisition operatives deployed into the
               cursed ruins.
             </p>
-            <p className="body_text md:w-3xl">
+            <p className="body_text md:w-5xl">
               United by faith and forged in conflict, these warriors of Maylon
               combine holy support, unbreakable frontline assault, and precise
               reconnaissance to purge corruption and complete their sacred
               mission.
             </p>
-            <p>View Character Details</p>
-          </div>
-          <div className="xl:w-2/3 flex">
+            <FadeInSection
+              className="flex z-90 gap-2 items-center relative cursor-pointer hover:opacity-70 hover:font-black transition-all duration-500 py-2"
+              onClick={() => setIsActive(!isActive)}
+              onMouseEnter={() => setIsActive(true)}
+              onMouseLeave={() => setIsActive(false)}
+            >
+              <p className="font-bold capitalize body_text">
+                View Character Details
+              </p>
+              <div className="relative pb-0.5">
+                <div
+                  className={`absolute h-0.5 transition-all duration-800 bg-linear-to-t from-transparent via-white to-transparent 
+                          ${isActive ? "w-56 -translate-y-5 -translate-x-56 rotate-0" : "w-2.5 -translate-y-0.5 rotate-200"}`}
+                />
+                <div
+                  className={`absolute h-0.5 transition-all duration-500 bg-linear-to-t from-transparent via-white to-transparent
+                            ${isActive ? "w-56 translate-y-5 -translate-x-56 rotate-0" : "w-2.5 translate-y-0.5 -rotate-200"}`}
+                />
+              </div>
+            </FadeInSection>
+          </FadeInSection>
+          <FadeInSection className="xl:w-2/3 flex">
             <Swiper
               modules={[Autoplay]}
               spaceBetween={20}
@@ -473,7 +497,7 @@ export default function Home() {
                 </SwiperSlide>
               ))}
             </Swiper>
-          </div>
+          </FadeInSection>
         </div>
       </section>
 
@@ -535,12 +559,12 @@ export default function Home() {
         {/* Chidren Container */}
         <div className="z-40 w-[80%] m-auto flex flex-col justify-center items-center h-full text-center gap-10">
           {/* Line top */}
-          <div className="flex flex-col items-center z-10">
+          <FadeInSection className="flex flex-col items-center z-10">
             <div className="w-10 h-0.5 bg-linear-to-t from-transparent via-white to-transparent" />
             <div className="w-0.5 h-25 bg-linear-to-r from-transparent via-white to-transparent" />
-          </div>
+          </FadeInSection>
           {/* Text Area */}
-          <div className="flex justify-center items-center flex-col gap-5">
+          <FadeInSection className="flex justify-center items-center flex-col gap-5">
             <h1 className="head font-bold leading-24 ">
               FROM CONCEPT <br /> TO REALITY
             </h1>
@@ -567,32 +591,32 @@ export default function Home() {
                 />
               </div>
             </div>
-          </div>
+          </FadeInSection>
           {/* Line Bottom */}
-          <div className="flex flex-col items-center z-10">
+          <FadeInSection className="flex flex-col items-center z-10">
             <div className="w-0.5 h-25 bg-linear-to-r from-transparent via-white to-transparent" />
             <div className="w-15 h-0.5 bg-linear-to-t from-transparent via-white to-transparent" />
-          </div>
+          </FadeInSection>
         </div>
       </section>
 
       {/* Section 6 - Behind the Fog */}
       <section>
         <div className="w-[80%] m-auto flex flex-col gap-10 py-[clamp(50px,1vh,240px)]">
-          <div>
+          <FadeInSection>
             <h1 className="big_head text-center">BEHIND THE FOG</h1>
-          </div>
+          </FadeInSection>
           {/* World Building */}
           <div className="flex flex-col gap-12">
-            <div className="flex flex-col gap-2.5">
+            <FadeInSection direction="left" className="flex flex-col gap-2.5">
               <h1 className="head">WORLD BUILDING</h1>
               <p className="text-body md:w-md">
                 We begin with lore, mood boards, and soundscapes before writing
                 a single line of code.
               </p>
-            </div>
+            </FadeInSection>
 
-            <div className="xl:w-2/3 flex">
+            <FadeInSection className="xl:w-2/3 flex">
               <Swiper
                 modules={[Autoplay]}
                 spaceBetween={20}
@@ -620,19 +644,22 @@ export default function Home() {
                   </SwiperSlide>
                 ))}
               </Swiper>
-            </div>
+            </FadeInSection>
           </div>
           {/* Artistic Obsession */}
           <div className="flex flex-col gap-12">
-            <div className="flex flex-col gap-2.5 text-right items-end">
+            <FadeInSection
+              direction="right"
+              className="flex flex-col gap-2.5 text-right items-end"
+            >
               <h1 className="head">ARTISTIC OBSESSION</h1>
               <p className="text-body md:w-md">
                 Every frame, every particle, and every shadow is crafted with
                 intention.
               </p>
-            </div>
+            </FadeInSection>
             <div className="flex justify-end">
-              <div className="w-full flex ">
+              <FadeInSection className="w-full flex ">
                 <Swiper
                   modules={[Autoplay]}
                   spaceBetween={20}
@@ -660,20 +687,20 @@ export default function Home() {
                     </SwiperSlide>
                   ))}
                 </Swiper>
-              </div>
+              </FadeInSection>
             </div>
           </div>
           {/* Player Experience */}
           <div className="flex flex-col gap-12">
-            <div className="flex flex-col gap-2.5">
+            <FadeInSection direction="left" className="flex flex-col gap-2.5">
               <h1 className="head">PLAYER EXPERIENCE</h1>
               <p className="text-body md:w-md">
                 We design for those who enjoy slow discovery, deep immersion,
                 and emotional payoff.
               </p>
-            </div>
+            </FadeInSection>
             <div>
-              <div className="w-full  flex">
+              <FadeInSection className="w-full  flex">
                 <Swiper
                   modules={[Autoplay]}
                   spaceBetween={20}
@@ -701,7 +728,7 @@ export default function Home() {
                     </SwiperSlide>
                   ))}
                 </Swiper>
-              </div>
+              </FadeInSection>
             </div>
           </div>
         </div>
@@ -711,12 +738,14 @@ export default function Home() {
       <section>
         <div className="w-[80%] m-auto flex flex-col gap-10 py-[clamp(50px,1vh,240px)]">
           <div className="flex flex-col justify-center items-center gap-10">
-            <h1 className="head text-center">STEP IN TO THE MIST</h1>
-            <p className="body_text md:w-xl text-center">
-              Receive rare updates, behind-the-scenes lore, and early access to
-              new worlds.
-            </p>
-            <div className="flex flex-col md:flex-row gap-10 items-center">
+            <FadeInSection className="flex flex-col justify-center items-center gap-5">
+              <h1 className="head text-center">STEP IN TO THE MIST</h1>
+              <p className="body_text md:w-xl text-center">
+                Receive rare updates, behind-the-scenes lore, and early access
+                to new worlds.
+              </p>
+            </FadeInSection>
+            <FadeInSection className="flex flex-col md:flex-row gap-10 items-center">
               <input
                 type="email"
                 name=""
@@ -726,7 +755,7 @@ export default function Home() {
               <button className="body_text bg-[#411015] hover:bg-white hover:text-black transition-all duration-300 cursor-pointer py-5 px-8 rounded-2xl">
                 JOIN
               </button>
-            </div>
+            </FadeInSection>
           </div>
           <div>{/* Newsletter Field and Join Button */}</div>
         </div>
@@ -736,10 +765,10 @@ export default function Home() {
       <section className="min-h-screen w-full bg-bl relative overflow-hidden">
         <div className="min-h-screen sm:h-screen">
           <div className="w-[80%] m-auto flex flex-col gap-10 sm:gap-0 sm:flex-row items-center justify-between h-full">
-            <div className="w-2/6">
+            <FadeInSection direction="left" className="w-2/6">
               <h1 className="big_head font-bold scale-y-150">FAQ</h1>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-10 sm:gap-10 items-center">
+            </FadeInSection>
+            <FadeInSection className="flex flex-col sm:flex-row gap-10 sm:gap-10 items-center">
               {/* Studio FAQs */}
               <div className="sm:w-3/6 flex flex-col gap-4">
                 <h2 className="body_text pb-5 font-bold">Studio FAQs</h2>
@@ -799,7 +828,7 @@ export default function Home() {
                 ))}
                 <hr />
               </div>
-            </div>
+            </FadeInSection>
           </div>
         </div>
       </section>
