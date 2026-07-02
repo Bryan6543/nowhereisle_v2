@@ -1,5 +1,7 @@
+"use client"
+
 import Image from "next/image";
-import React from "react";
+import Link from "next/link";
 
 export default function footer() {
   return (
@@ -17,10 +19,18 @@ export default function footer() {
           <div className="flex flex-col gap-5">
             <p className="body-text font-bold">Quick Links</p>
             <ul className="flex flex-col gap-2.5 opacity-70">
-              <li>Game: Sigil Tactics: Lost Maylon</li>
-              <li>Community</li>
-              <li>Support</li>
-              <li>About</li>
+              <Link href="/isle_games">
+                <li>Game: Sigil Tactics: Lost Maylon</li>
+              </Link>
+              <Link href="/isle/community">
+                <li>Community</li>
+              </Link>
+              <Link href="/isle/support">
+                <li>Support</li>
+              </Link>
+              <Link href="/isle/about">
+                <li>About</li>
+              </Link>
             </ul>
           </div>
           {/* Section 03 */}

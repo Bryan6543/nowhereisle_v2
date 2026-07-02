@@ -8,9 +8,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`h-full antialiased`}>
-      <body className="min-h-full flex flex-col">
-        {/* <Image
+    <>
+      {/* <Image
           src={"/red-tree.png"}
           width={1787}
           height={1597}
@@ -18,10 +17,9 @@ export default function RootLayout({
           alt=""
         /> */}
 
-        <Navbar />
-        {children}
-        <Footer />
-      </body>
-    </html>
+      <Navbar />
+      {children}
+      <Footer />
+    </>
   );
 }

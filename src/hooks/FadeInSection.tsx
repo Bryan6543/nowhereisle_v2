@@ -51,7 +51,7 @@ export default function FadeInSection({
         ease: "power3.out",
         scrollTrigger: {
           trigger: elem,
-          start: "top 88%",
+          start: "top 90%",
           toggleActions: "play none none reverse",
           // markers: true
         },

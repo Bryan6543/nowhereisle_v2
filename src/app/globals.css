@@ -264,7 +264,19 @@
 
   .nav_link_text {
     font-family: var(--font-lilex);
-    font-size: clamp(6px, 7vw, 12px);
+    font-size: clamp(6px, 7vw, 13px);
     color: white;
   }
+
+  .lora_head {
+    font-family: var(--font-lora);
+    font-size: clamp(20px, 7vw, 24px);
+  }
+
+  .lora_body {
+    font-family: var(--font-lora);
+    font-size: clamp(11px, 1vw, 16px);
+  }
+
+
 }

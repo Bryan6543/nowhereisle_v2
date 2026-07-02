@@ -3,6 +3,7 @@ import { Keania_One, Lilex, Lilita_One, Lora } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import Preloader from "@/components/ui/preloader";
+import SmoothScrollProvider from "@/hooks/SmoothScrollProvider";
 
 const keaniaOne = Keania_One({
   variable: "--font-keania-one",
@@ -108,7 +109,7 @@ export default function RootLayout({
       `,
               }}
             />
-            {children}
+            <SmoothScrollProvider>{children}</SmoothScrollProvider>
           </div>
         </ThemeProvider>
       </body>

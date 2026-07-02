@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import FadeInSection from "@/hooks/FadeInSection";
+import FAQ from "@/components/multiple_use/FAQ";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -17,88 +18,20 @@ import { soulsCharactersSlides } from "@/data/SlidesData";
 import { worldBuildingSlides } from "@/data/SlidesData";
 import { artisticObsessionSlides } from "@/data/SlidesData";
 import { playerExperienceSlides } from "@/data/SlidesData";
+import GetInTouch from "@/components/multiple_use/GetInTouch";
 
 gsap.registerPlugin(ScrollTrigger);
 
-type StudioFAQItem = {
-  question: string;
-  answer: string;
-};
 
-const studiofaqs: StudioFAQItem[] = [
-  {
-    question: "What is Nowhere Isle Studio?",
-    answer:
-      "Nowhere Isle Studios is an independent game studio creating single-player narrative and strategy games with rich worldbuilding, distinctive systems, and a strong sense of atmosphere.",
-  },
-  {
-    question: "Where is NowhereIsle based?",
-    answer: "Sri Lanka, Colombo",
-  },
-  {
-    question: "Are you hiring or looking for collaborators?",
-    answer:
-      "We're always open to connecting with talented artists, programmers, composers, and writers. Feel free to reach out via email",
-  },
-  {
-    question: "I found a bug / have feedback. How do I report it?",
-    answer: "File a feedback or bug report on the website.",
-  },
-];
-
-type GameFAQItem = {
-  question: string;
-  answer: string;
-};
-
-const gamefaqs: GameFAQItem[] = [
-  {
-    question: "What is Sigil Tactics: Lost Maylon?",
-    answer:
-      "A brutal squad-based turn-based tactics RPG about leading a doomed Inquisition expedition into corrupted territory to reclaim the Lost Holy Capital of Maylon.",
-  },
-  {
-    question: "What platform is it coming to?",
-    answer: "PC.",
-  },
-  {
-    question: "Is it single-player?",
-    answer: "Yes.",
-  },
-  {
-    question: "Is there a release date?",
-    answer: "Coming Soon.",
-  },
-  {
-    question: "Is there a demo?",
-    answer: "To be announced.",
-  },
-  {
-    question: "Can I wishlist it?",
-    answer: "Wishlist links will be added when the Steam page is available.",
-  },
-  {
-    question: "Is there a trailer?",
-    answer: "A trailer will be added when ready.",
-  },
-];
 export default function Home() {
-  // FAQ
-  const [openStudioIndex, setOpenStudioINdex] = useState<number | null>(null);
-  const [openGameIndex, setOpenGameINdex] = useState<number | null>(null);
+  
   const [isActive, setIsActive] = useState(false);
-
   const conceptRealitySection = useRef<HTMLDivElement>(null);
 
-  const toggleStudioFAQ = (index: number) => {
-    setOpenStudioINdex(openStudioIndex === index ? null : index);
-  };
 
-  const toggleGameFAQ = (index: number) => {
-    setOpenGameINdex(openGameIndex === index ? null : index);
-  };
 
   useEffect(() => {
+  const ctx = gsap.context(() => {
     // Starter Animations
     const startAnimations = () => {
       gsap
@@ -121,43 +54,42 @@ export default function Home() {
         );
     };
 
-    // Listen for preloader completion
-    document.addEventListener("preloaderComplete", startAnimations);
+     const handleStart = () => startAnimations();
+
+    document.addEventListener("preloaderComplete", handleStart);
+
+    // Always run on mount as fallback
+    requestAnimationFrame(() => {
+      startAnimations();
+    });
+
+
+    // Run immediately if already loaded before
+    if (sessionStorage.getItem("preloaderFinished")) {
+      startAnimations();
+    }
 
     // SECTION 02 - Nowhere isle Introduction
-    // Overlay
     gsap
       .timeline({
         scrollTrigger: {
           trigger: ".s2_SliderContainer",
           start: "top 45%",
           end: "center 50%",
-          // scrub: 1,
-          // markers: true,
         },
       })
       .fromTo(
         ".overlay-logo",
-        {
-          x: "0%",
-          opacity: "100%",
-        },
-        {
-          x: "-50vw",
-          opacity: "0%",
-          ease: "power3.out",
-          duration: 2,
-        },
+        { x: "0%", opacity: "100%" },
+        { x: "-50vw", opacity: "0%", ease: "power3.out", duration: 2 },
       );
-    // groundLayer
+
     gsap
       .timeline({
         scrollTrigger: {
           trigger: ".s2_SliderContainer",
           start: "top 40%",
           end: "center 50%",
-          // scrub: 1,
-          // markers: true,
         },
       })
       .fromTo(
@@ -183,13 +115,9 @@ export default function Home() {
 
     // SECTION 05 - From Concept to Reality
     if (conceptRealitySection.current) {
-      // Left Side Images
       gsap.fromTo(
         ".left-side-image",
-        {
-          rotate: 0,
-          x: 0,
-        },
+        { rotate: 0, x: 0 },
         {
           x: -400,
           rotate: -10,
@@ -203,13 +131,9 @@ export default function Home() {
         },
       );
 
-      // Right Side Images
       gsap.fromTo(
         ".right-side-image",
-        {
-          rotate: 0,
-          x: 0,
-        },
+        { rotate: 0, x: 0 },
         {
           x: 400,
           rotate: 10,
@@ -223,12 +147,13 @@ export default function Home() {
         },
       );
     }
+  });
 
-    return () => {
-      document.removeEventListener("preloaderComplete", startAnimations);
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
+  return () => {
+    document.removeEventListener("preloaderComplete", () => {});
+    ctx.revert();
+  };
+}, []);
 
   return (
     <main>
@@ -735,103 +660,10 @@ export default function Home() {
       </section>
 
       {/* Section 7 - Step in to the Mist (Email Subs) */}
-      <section>
-        <div className="w-[80%] m-auto flex flex-col gap-10 py-[clamp(50px,1vh,240px)]">
-          <div className="flex flex-col justify-center items-center gap-10">
-            <FadeInSection className="flex flex-col justify-center items-center gap-5">
-              <h1 className="head text-center">STEP IN TO THE MIST</h1>
-              <p className="body_text md:w-xl text-center">
-                Receive rare updates, behind-the-scenes lore, and early access
-                to new worlds.
-              </p>
-            </FadeInSection>
-            <FadeInSection className="flex flex-col md:flex-row gap-10 items-center">
-              <input
-                type="email"
-                name=""
-                id=""
-                className="border-white/50 bg-white/10 border-4 rounded-2xl h-15 w-full md:w-90 px-4 body-text transition-all duration-300 hover:bg-black/50"
-              />
-              <button className="body_text bg-[#411015] hover:bg-white hover:text-black transition-all duration-300 cursor-pointer py-5 px-8 rounded-2xl">
-                JOIN
-              </button>
-            </FadeInSection>
-          </div>
-          <div>{/* Newsletter Field and Join Button */}</div>
-        </div>
-      </section>
+      <GetInTouch />
 
       {/* Section 8 - FAQ */}
-      <section className="min-h-screen w-full bg-bl relative overflow-hidden">
-        <div className="min-h-screen sm:h-screen">
-          <div className="w-[80%] m-auto flex flex-col gap-10 sm:gap-0 sm:flex-row items-center justify-between h-full">
-            <FadeInSection direction="left" className="w-2/6">
-              <h1 className="big_head font-bold scale-y-150">FAQ</h1>
-            </FadeInSection>
-            <FadeInSection className="flex flex-col sm:flex-row gap-10 sm:gap-10 items-center">
-              {/* Studio FAQs */}
-              <div className="sm:w-3/6 flex flex-col gap-4">
-                <h2 className="body_text pb-5 font-bold">Studio FAQs</h2>
-                {studiofaqs.map((studiofaq, index) => (
-                  <div
-                    onClick={() => toggleStudioFAQ(index)}
-                    // oq
-                    className="cursor-pointer hover:bg-white/5 transition-all duration-300 py-2 flex flex-col gap-4 px-5 bg-white/2"
-                  >
-                    <hr />
-                    <div
-                      className="flex justify-between gap-5"
-                      // aria-expanded={openIndex === index}
-                    >
-                      <h3 className="body_text font-bold">
-                        {studiofaq.question}
-                      </h3>
-                      <p>{openStudioIndex === index ? " - " : " + "}</p>
-                    </div>
-
-                    <div
-                      className={`w-5/6 overflow-hidden transition-all duration-500 ${openStudioIndex === index ? "max-h-96 mt-4" : "max-h-0"}`}
-                    >
-                      <p className="body_text opacity-85">{studiofaq.answer}</p>
-                    </div>
-                  </div>
-                ))}
-                <hr />
-              </div>
-              {/* Game FAQs */}
-              <div className="sm:w-3/6 flex flex-col gap-4">
-                <h2 className="body_text font-bold">Game FAQs</h2>
-                {gamefaqs.map((gamefaq, index) => (
-                  <div
-                    key={index}
-                    onClick={() => toggleGameFAQ(index)}
-                    // oq
-                    className="cursor-pointer hover:bg-white/5 transition-all duration-300 py-2 flex flex-col gap-4 px-5 bg-white/2"
-                  >
-                    <hr />
-                    <div
-                      className="flex justify-between gap-5"
-                      // aria-expanded={openIndex === index}
-                    >
-                      <h3 className="body_text font-bold">
-                        {gamefaq.question}
-                      </h3>
-                      <p>{openGameIndex === index ? " - " : " + "}</p>
-                    </div>
-
-                    <div
-                      className={`w-5/6 overflow-hidden transition-all duration-500 ${openGameIndex === index ? "max-h-96 mt-4" : "max-h-0"}`}
-                    >
-                      <p className="body_text opacity-85">{gamefaq.answer}</p>
-                    </div>
-                  </div>
-                ))}
-                <hr />
-              </div>
-            </FadeInSection>
-          </div>
-        </div>
-      </section>
+      <FAQ />
     </main>
   );
 }
