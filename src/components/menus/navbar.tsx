@@ -145,24 +145,26 @@ export default function Navbar() {
 
   return (
     <>
+    <div className="text-center py-2 z-9999 fixed top-0 bg-black w-full text-xs text-yellow-500">ISLE UNDER|CONSTRUCTION</div>
       {/* Navbar */}
       <nav
         ref={navRef}
-        className="nav_bar fixed top-0 left-0 z-50 flex h-25 w-screen justify-between bg-black/20 backdrop-blur-sm opacity-0 -translate-y-30"
+        className="mt-5 nav_bar fixed top-0 left-0 z-50 flex h-25 w-screen justify-between bg-black/20 backdrop-blur-sm opacity-0 -translate-y-30"
       >
         <div className="mx-auto flex h-full w-[80%] items-center justify-between">
           <Link href={"/isle"} className="w-fit h-full">
-          <Image
-            src="/logo2.png"
-            width={484}
-            height={236}
-            alt="nowhere_isle_game_studio_logo"
-            className="nav_logo h-full w-fit object-contain -translate-x-100 opacity-0"
-          /></Link>
+            <Image
+              src="/logo2.png"
+              width={484}
+              height={236}
+              alt="nowhere_isle_game_studio_logo"
+              className="nav_logo h-full w-fit object-contain -translate-x-100 opacity-0"
+            />
+          </Link>
 
           <div className="nav_links nav_link_text translate-x-120 opacity-0 hidden items-center gap-9 md:flex">
-            <Link href={"/isle_games"}>
-              <p className="cursor-pointer">Game: Sigil Tactics: Lost Maylon</p>
+            <Link href={"/"}>
+              <p className="cursor-pointer opacity-30 ">Isle Dashboard</p>
             </Link>
             <Link href={"/isle/community"}>
               <p className="cursor-pointer">Community</p>
@@ -193,17 +195,22 @@ export default function Navbar() {
           ref={linksRef}
           className="flex flex-col h-full justify-between pt-50 pb-10 font-bold uppercase tracking-widest"
         >
-          <div className="flex flex-col gap-10 massive_shead">
+          <div className="flex flex-col text-center gap-10 massive_shead">
             <Link href={"/isle/"}>
-              <button onClick={() => setMenuOpen(false)}>Game</button>
+              <button onClick={() => setMenuOpen(false)}>Home</button>
             </Link>
             <Link href={"/isle/"}>
+              <button className="opacity-30" onClick={() => setMenuOpen(false)}>
+                Isle Dashboard
+              </button>
+            </Link>
+            <Link href={"/isle/community"}>
               <button onClick={() => setMenuOpen(false)}>Community</button>
             </Link>
-            <Link href={"/isle/"}>
+            <Link href={"/isle/support"}>
               <button onClick={() => setMenuOpen(false)}>Support</button>
             </Link>
-            <Link href={"/isle/"}>
+            <Link href={"/isle/about"}>
               <button onClick={() => setMenuOpen(false)}>About</button>
             </Link>
           </div>

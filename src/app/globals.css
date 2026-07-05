@@ -251,6 +251,11 @@
     font-family: var(--font-keania);
     font-size: clamp(24px, 7vw, 40px);
   }
+
+  .sub_head_sm {
+    font-family: var(--font-keania);
+    font-size: clamp(8px, 8vw, 20px);
+  }
   .body_text {
     font-family: var(--font-lilex);
     font-size: clamp(11px, 1vw, 16px);
@@ -278,5 +283,12 @@
     font-size: clamp(11px, 1vw, 16px);
   }
 
+  .font_lilita {
+    font-family: var(--font-lilita);
+  }
 
+  .font_quot {
+    font-family: var(--font-inconsolata);
+    font-size: clamp(8px, 7vw, 20px);
+  }
 }

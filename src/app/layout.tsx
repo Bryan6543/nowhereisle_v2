@@ -1,9 +1,24 @@
 import type { Metadata } from "next";
-import { Keania_One, Lilex, Lilita_One, Lora } from "next/font/google";
+import {
+  Keania_One,
+  Lilex,
+  Lilita_One,
+  Lora,
+  Inconsolata,
+} from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import Preloader from "@/components/ui/preloader";
 import SmoothScrollProvider from "@/hooks/SmoothScrollProvider";
+import ScrollToTop from "@/hooks/ScrollToTop";
+
+const inconsolata = Inconsolata({
+  variable: "--font-inconsolata",
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
+  preload: true,
+});
 
 const keaniaOne = Keania_One({
   variable: "--font-keania-one",
@@ -43,9 +58,9 @@ const lora = Lora({
 export const metadata: Metadata = {
   title: "NoWhere Isle",
   description:
-    "Discover the mysterious NoWhere Isle - A beautiful island adventure awaits.",
+    "Discover the official NoWhere Isle Game Studio ",
 
-  keywords: ["gamestudio", "adventure", "travel", "NoWhere Isle"],
+  keywords: ["gamestudio", "NoWhere Isle"],
   authors: [{ name: "Bryan Fernando" }],
   creator: "Digital Power Grid",
 
@@ -67,18 +82,18 @@ export const metadata: Metadata = {
     type: "website",
   },
 
-  twitter: {
-    card: "summary_large_image",
-    title: "NoWhere Isle",
-    description:
-      "Discover the mysterious NoWhere Isle - A beautiful island adventure awaits.",
-    images: ["/opengraph-image.jpg"],
-    creator: "@yourtwitterhandle",
-  },
+  // twitter: {
+  //   card: "summary_large_image",
+  //   title: "NoWhere Isle",
+  //   description:
+  //     "Discover the mysterious NoWhere Isle - A beautiful island adventure awaits.",
+  //   images: ["/opengraph-image.jpg"],
+  //   creator: "@yourtwitterhandle",
+  // },
 
-  icons: {
-    icon: "/favicon.ico",
-  },
+  // icons: {
+  //   icon: "/favicon.ico",
+  // },
 };
 
 export default function RootLayout({
@@ -89,10 +104,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${keaniaOne.variable} ${lilex.variable} ${lilitaOne.variable} ${lora.variable} h-full antialiased`}
+      className={`${inconsolata.variable} ${keaniaOne.variable} ${lilex.variable} ${lilitaOne.variable} ${lora.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-black">
-        {/* <Preloader /> */}
+        <Preloader />
+
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="min-h-screen w-full bg-[--color-background] relative overflow-hidden">
             {/* Rose Spotlight Background */}
