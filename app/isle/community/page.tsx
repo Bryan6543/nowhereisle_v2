@@ -1,5 +1,5 @@
 import Image from "next/image";
-import FadeInSection from "@/hooks/FadeInSection";
+import FadeInSection from "../../../hooks/FadeInSection";
 
 export default function page() {
   return (
@@ -98,21 +98,21 @@ export default function page() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             <FadeInSection className="w-[95%] flex justify-center items-center gap-4 flex-col">
               <h2 className="lora_head font-semibold">DEEP LORE DISCUSSIONS</h2>
-              <p className="lora_body w-xs md:w-sm">
+              <p className="lora_body w-auto ">
                 Talk about theories, hidden meanings, and the world we are
                 slowly revealing.
               </p>
             </FadeInSection>
             <FadeInSection className="w-[95%] flex justify-center items-center gap-4 flex-col">
               <h2 className="lora_head font-semibold">SHARE YOUR CREATIONS</h2>
-              <p className="lora_body w-sm">
+              <p className="lora_body w-auto">
                 Post your fan art, music, stories, or theories. All creativity
                 is welcomed.
               </p>
             </FadeInSection>
             <FadeInSection className="w-[95%] flex justify-center items-center gap-4 flex-col">
               <h2 className="lora_head font-semibold">A CALM CORNER</h2>
-              <p className="lora_body w-sm">
+              <p className="lora_body w-auto">
                 Talk about theories, hidden meanings, and the world we are
                 slowly revealing.
               </p>
@@ -129,7 +129,7 @@ export default function page() {
           </FadeInSection>
           <div className="flex w-[80%] m-auto flex-col md:flex-row justify-center items-center gap-5 md:gap-10">
             <FadeInSection className="bg-black px-10 py-10 rounded-2xl flex gap-5 flex-col">
-              <p className="lora_body w-sm md:w-md">
+              <p className="lora_body w-auto">
                 "Finally found a community that feels like home. The lore
                 discussions here are next level."
               </p>
@@ -138,7 +138,7 @@ export default function page() {
               </p>
             </FadeInSection>
             <FadeInSection className="bg-black px-10 py-10 rounded-2xl flex gap-5 flex-col">
-              <p className="lora_body w-sm md:w-md">
+              <p className="lora_body w-auto">
                 "The atmosphere in this community matches the games perfectly.
                 It's peaceful yet full of wonder."
               </p>

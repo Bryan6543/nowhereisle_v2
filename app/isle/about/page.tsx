@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import FadeInSection from "@/hooks/FadeInSection";
-import BehindTheFog from "@/components/multiple_use/BehindTheFog";
-import GetInTouch from "@/components/multiple_use/GetInTouch";
+import FadeInSection from "../../../hooks/FadeInSection";
+import BehindTheFog from "../../../components/multiple_use/BehindTheFog";
+import GetInTouch from "../../../components/multiple_use/GetInTouch";
 
 export default function page() {
   return (

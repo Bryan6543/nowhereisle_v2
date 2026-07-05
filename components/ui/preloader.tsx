@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { gsap } from "gsap";
-import { preloadAllAssets } from "@/lib/preloadAssets";
+import { preloadAllAssets } from "../../lib/preloadAssets";
 import Image from "next/image";
 
 export default function Preloader() {

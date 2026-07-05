@@ -6,20 +6,20 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import FadeInSection from "@/hooks/FadeInSection";
-import FAQ from "@/components/multiple_use/FAQ";
+import FadeInSection from "../../hooks/FadeInSection";
+import FAQ from "../../components/multiple_use/FAQ";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import { homeHeroSlides } from "@/data/SlidesData";
-import { soulsCharactersSlides } from "@/data/SlidesData";
-import { worldBuildingSlides } from "@/data/SlidesData";
-import { artisticObsessionSlides } from "@/data/SlidesData";
-import { playerExperienceSlides } from "@/data/SlidesData";
-import GetInTouch from "@/components/multiple_use/GetInTouch";
-import BehindTheFog from "@/components/multiple_use/BehindTheFog";
+import { homeHeroSlides } from "../../data/SlidesData";
+import { soulsCharactersSlides } from "../../data/SlidesData";
+import { worldBuildingSlides } from "../../data/SlidesData";
+import { artisticObsessionSlides } from "../../data/SlidesData";
+import { playerExperienceSlides } from "../../data/SlidesData";
+import GetInTouch from "../../components/multiple_use/GetInTouch";
+import BehindTheFog from "../../components/multiple_use/BehindTheFog";
 
 gsap.registerPlugin(ScrollTrigger);
 

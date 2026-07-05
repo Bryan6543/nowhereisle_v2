@@ -1,6 +1,6 @@
 "use client"
 
-import FadeInSection from "@/hooks/FadeInSection"
+import FadeInSection from "../../hooks/FadeInSection"
 
 export default function GetInTouch() {
   return (

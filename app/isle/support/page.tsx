@@ -3,10 +3,10 @@
 import Image from "next/image";
 import React from "react";
 import { useState } from "react";
-import FadeInSection from "@/hooks/FadeInSection";
+import FadeInSection from "../../../hooks/FadeInSection";
 
-import FAQ from "@/components/multiple_use/FAQ";
-import GetInTouch from "@/components/multiple_use/GetInTouch";
+import FAQ from "../../../components/multiple_use/FAQ";
+import GetInTouch from "../../../components/multiple_use/GetInTouch";
 
 type ReportType = "studio" | "game" | "";
 type GameReportType = "bug" | "feedback" | "";

@@ -8,9 +8,9 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import Preloader from "@/components/ui/preloader";
-import SmoothScrollProvider from "@/hooks/SmoothScrollProvider";
-import ScrollToTop from "@/hooks/ScrollToTop";
+import Preloader from "../components/ui/preloader";
+import SmoothScrollProvider from "../hooks/SmoothScrollProvider";
+import ScrollToTop from "../hooks/ScrollToTop";
 
 const inconsolata = Inconsolata({
   variable: "--font-inconsolata",

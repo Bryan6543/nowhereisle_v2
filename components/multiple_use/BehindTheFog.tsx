@@ -1,11 +1,11 @@
-import FadeInSection from "@/hooks/FadeInSection"
+import FadeInSection from "../../hooks/FadeInSection"
 import Image from "next/image"
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
-import { worldBuildingSlides } from "@/data/SlidesData";
-import { artisticObsessionSlides } from "@/data/SlidesData";
-import { playerExperienceSlides } from "@/data/SlidesData";
+import { worldBuildingSlides } from "../../data/SlidesData";
+import { artisticObsessionSlides } from "../../data/SlidesData";
+import { playerExperienceSlides } from "../../data/SlidesData";
 
 import "swiper/css";
 import "swiper/css/navigation";
