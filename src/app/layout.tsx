@@ -56,9 +56,9 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://nowhereisle.com"),
   title: "NoWhere Isle",
-  description:
-    "Discover the official NoWhere Isle Game Studio ",
+  description: "Discover the official NoWhere Isle Game Studio ",
 
   keywords: ["gamestudio", "NoWhere Isle"],
   authors: [{ name: "Bryan Fernando" }],
