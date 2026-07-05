@@ -1,6 +1,1 @@
-import { redirect } from "next/navigation";
-import React from "react";
-
-export default function page() {
-  return redirect("/isle");
-}
+export const revalidate = 0; // or use dynamic = 'force-dynamic'
