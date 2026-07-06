@@ -52,7 +52,7 @@ export default function FadeInSection({
         scrollTrigger: {
           trigger: elem,
           start: "top 95%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none none",
           // markers: true
         },
       }
