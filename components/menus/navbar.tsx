@@ -163,8 +163,8 @@ export default function Navbar() {
           </Link>
 
           <div className="nav_links nav_link_text translate-x-120 opacity-0 hidden items-center gap-9 md:flex">
-            <Link href={"/"}>
-              <p className="cursor-pointer opacity-30 ">Isle Dashboard</p>
+            <Link href={"/isle_dashboard"}>
+              <p className="cursor-pointer">Isle Dashboard</p>
             </Link>
             <Link href={"/isle/community"}>
               <p className="cursor-pointer">Community</p>
@@ -200,7 +200,7 @@ export default function Navbar() {
               <button onClick={() => setMenuOpen(false)}>Home</button>
             </Link>
             <Link href={"/isle/"}>
-              <button className="opacity-30" onClick={() => setMenuOpen(false)}>
+              <button className="" onClick={() => setMenuOpen(false)}>
                 Isle Dashboard
               </button>
             </Link>

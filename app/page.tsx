@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
 export default function Page() {
-  redirect("/isle");
+    redirect("/isle");
 }
 
 export const dynamic = 'force-dynamic';

@@ -18,9 +18,9 @@ export default function footer() {
           {/* Section 02 */}
           <div className="flex flex-col gap-5">
             <p className="body-text font-bold">Quick Links</p>
-            <ul className="flex flex-col gap-2.5 opacity-70">
-              <Link href="/isle_games">
-                <li>Game: Sigil Tactics: Lost Maylon</li>
+            <ul className="flex flex-col gap-2.5">
+              <Link href="/isle_dashboard">
+                <li>Isle Dashboard</li>
               </Link>
               <Link href="/isle/community">
                 <li>Community</li>

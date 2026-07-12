@@ -1,13 +1,5 @@
 export const criticalAssets = {
-  images: [
-    "/img-1.png",
-    "/img-2.png",
-    "/img-3.png",
-    "/img-4.png",
-    "/art-1.png",
-    "/logo.png",
-    "/logo2.png",
-  ],
+  images: ["/img-1.png", "/img-2.png", "/img-3.png"],
   videos: ["/"],
   fonts: [""],
 } as const;

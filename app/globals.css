@@ -291,4 +291,19 @@
     font-family: var(--font-inconsolata);
     font-size: clamp(8px, 7vw, 20px);
   }
+
+  .dashboard_head {
+    font-family: var(--font-maidenOrange);
+    font-size: clamp(20px, 7vw, 32px);
+  }
+
+  .orange_subhead {
+    font-family: var(--font-maidenOrange);
+    font-size: clamp(18px, 7vw, 24px);
+  }
+
+  .orange_body {
+    font-family: var(--font-maidenOrange);
+    font-size: clamp(8px, 7vw, 15px);
+  }
 }

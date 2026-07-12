@@ -5,12 +5,22 @@ import {
   Lilita_One,
   Lora,
   Inconsolata,
+  Maiden_Orange,
 } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import Preloader from "../components/ui/preloader";
 import SmoothScrollProvider from "../hooks/SmoothScrollProvider";
 import ScrollToTop from "../hooks/ScrollToTop";
+
+
+const maidenOrange = Maiden_Orange({
+  variable: "--font-maidenOrange",
+  subsets: ["latin"],
+  weight: ["400"],
+  display: "swap",
+  preload: true,
+});
 
 const inconsolata = Inconsolata({
   variable: "--font-inconsolata",
@@ -104,7 +114,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inconsolata.variable} ${keaniaOne.variable} ${lilex.variable} ${lilitaOne.variable} ${lora.variable} h-full antialiased`}
+      className={`${maidenOrange.variable} ${inconsolata.variable} ${keaniaOne.variable} ${lilex.variable} ${lilitaOne.variable} ${lora.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-black">
         <Preloader />
