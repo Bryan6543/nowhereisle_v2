@@ -15,7 +15,9 @@ export default function DashboardLayout({
   return (
     <div className="relative">
       <Sidebar />
-      <main className="pl-72 ">{children}</main>
+      <div className="lg:pl-72 pt-16 lg:pt-0 min-h-screen">
+      {children}
+      </div>
     </div>
   );
 }

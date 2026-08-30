@@ -5,7 +5,6 @@ import { useState } from "react";
 import FadeInSection from "../../../hooks/FadeInSection";
 import FAQ from "../../../components/multiple_use/FAQ";
 import GetInTouch from "../../../components/multiple_use/GetInTouch";
-import { supabase } from "../../../lib/supabase";
 
 type ReportType = "studio" | "game" | "";
 type GameReportType = "bug" | "feedback" | "";
@@ -18,45 +17,50 @@ export default function SupportPage() {
   const [email, setEmail] = useState("");           // ← New: Contact email
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [ticketNumber, setTicketNumber] = useState<string | null>(null)
+  const [ticketUrl, setTicketUrl] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!subject || !description) return;
+    e.preventDefault()
+    if (!subject || !description || !reportType) return
+    if (reportType === 'game' && !gameReportType) return
 
-    setIsSubmitting(true);
+    setIsSubmitting(true)
 
     try {
-      const finalSubject =
-        reportType === "game"
-          ? `[${gameReportType?.toUpperCase()}] ${subject}`
-          : subject;
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/support`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          report_type: reportType,
+          game_report_type: gameReportType || null,
+          subject,
+          description,
+          email: email.trim() || null,
+        }),
+      })
 
-      const { error } = await supabase.from("support_inquiries").insert({
-        report_type: reportType,
-        game_report_type: gameReportType || null,
-        subject: finalSubject,
-        description,
-        email: email.trim() || null,
-      });
+      const data = await res.json()
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || 'Failed to submit')
+      }
 
-      if (error) throw error;
+      setTicketNumber(data.ticket_number)
+      setTicketUrl(data.view_url)
+      setSubmitted(true)
 
-      setSubmitted(true);
-      
-      // Reset form
-      setReportType("");
-      setGameReportType("");
-      setSubject("");
-      setDescription("");
-      setEmail("");
+      setReportType('')
+      setGameReportType('')
+      setSubject('')
+      setDescription('')
+      setEmail('')
     } catch (error) {
-      console.error(error);
-      alert("Failed to send message. Please try again.");
+      console.error(error)
+      alert('Failed to send message. Please try again.')
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
-
+  }
   return (
     <main>
       {/* Hero */}
@@ -82,8 +86,40 @@ export default function SupportPage() {
         </FadeInSection>
       </div>
 
+
       {/* Form */}
-      <FadeInSection className="max-w-5xl mx-auto px-6 md:py-20">
+      < FadeInSection className="max-w-5xl mx-auto px-6 md:py-20">{submitted ? (
+        <div className="text-center py-16">
+          <div className="text-6xl mb-6">🌫️</div>
+          <h3 className="text-3xl font-semibold text-red-400 mb-4">Message Received</h3>
+          <p className="text-gray-400 max-w-md mx-auto mb-4">
+            Thank you. Your support ticket has been created.
+          </p>
+          {ticketNumber && (
+            <p className="text-white text-lg mb-2">
+              Ticket number: <span className="font-semibold">{ticketNumber}</span>
+            </p>
+          )}
+          {ticketUrl && (
+            <p className="text-gray-400 mb-6">
+              Track updates:{" "}
+              <a href={ticketUrl} className="text-red-400 underline">
+                open your ticket
+              </a>
+            </p>
+          )}
+          <button
+            onClick={() => {
+              setSubmitted(false)
+              setTicketNumber(null)
+              setTicketUrl(null)
+            }}
+            className="mt-4 px-10 py-4 border border-red-700 hover:bg-red-950 rounded-2xl transition"
+          >
+            Send Another Message
+          </button>
+        </div>
+      ) : (
         <div className="bg-black border border-zinc-800 rounded-3xl p-10 md:p-16">
           {submitted ? (
             <div className="text-center py-16">
@@ -182,13 +218,14 @@ export default function SupportPage() {
               )}
             </form>
           )}
-        </div>
-      </FadeInSection>
+        </div>)
+      }
 
+      </FadeInSection>
       <div className="md:pt-30">
         <GetInTouch />
       </div>
       <FAQ />
-    </main>
+    </main >
   );
 }

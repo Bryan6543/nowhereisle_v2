@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "../../lib/supabase";
 import FadeInSection from "../../hooks/FadeInSection";
 
 export default function GetInTouch() {
@@ -11,7 +10,7 @@ export default function GetInTouch() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!email || !email.includes("@")) {
       setStatus("error");
       setMessage("Please enter a valid email address");
@@ -22,26 +21,33 @@ export default function GetInTouch() {
     setMessage("");
 
     try {
-      const { error } = await supabase
-        .from("newsletter_subscribers")
-        .insert({ email: email.toLowerCase().trim() });
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-      if (error) {
-        if (error.code === "23505") { // Unique violation
-          setStatus("success");
-          setMessage("You're already subscribed! 🎉");
-        } else {
-          throw error;
-        }
-      } else {
-        setStatus("success");
-        setMessage("Thank you! You've joined the mist.");
-        setEmail(""); // Clear input
+      if (!apiUrl) {
+        throw new Error("Missing NEXT_PUBLIC_API_URL");
       }
-    } catch (err) {
+
+      const res = await fetch(`${apiUrl}/api/subscribe`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || "Something went wrong. Please try again.");
+      }
+
+      setStatus("success");
+      setMessage(data.message || "Thank you! You've joined the mist.");
+      setEmail("");
+    } catch (err: any) {
       console.error(err);
       setStatus("error");
-      setMessage("Something went wrong. Please try again.");
+      setMessage(err.message || "Something went wrong. Please try again.");
     }
   };
 
@@ -49,7 +55,6 @@ export default function GetInTouch() {
     <section>
       <div className="w-[80%] m-auto flex flex-col gap-10 py-[clamp(50px,1vh,240px)]">
         <div className="flex flex-col justify-center items-center gap-10">
-          
           <FadeInSection className="flex flex-col justify-center items-center gap-5">
             <h1 className="head text-center">STEP INTO THE MIST</h1>
             <p className="body_text md:w-xl text-center">
@@ -59,7 +64,10 @@ export default function GetInTouch() {
           </FadeInSection>
 
           <FadeInSection>
-            <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-4 items-center w-full max-w-md">
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col md:flex-row gap-4 items-center w-full max-w-md"
+            >
               <input
                 type="email"
                 value={email}
@@ -79,7 +87,6 @@ export default function GetInTouch() {
             </form>
           </FadeInSection>
 
-          {/* Status Message */}
           {message && (
             <p
               className={`text-center text-sm font-medium transition-all ${

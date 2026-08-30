@@ -1,63 +1,88 @@
-import { supabase } from "../../../lib/supabase";
-import Link from "next/link";
-import Image from "next/image";
-import FadeInSection from "../../../hooks/FadeInSection";
+import { supabase } from "@/lib/supabase/client";
+import FadeInSection from "@/hooks/FadeInSection";
+import LoreWisdomGallery from "@/components/dashboard/LoreWisdomGallery";
 
-async function getBlogs() {
-  const { data } = await supabase
-    .from("blogs")
-    .select("id, title, thumbnail_url, created_at")
-    .order("created_at", { ascending: false });
+type BlogCard = {
+  id: string;
+  title: string;
+  thumbnail_url?: string | null;
+  created_at: string;
+  category_id?: number | null;
+  category_name?: string | null;
+};
 
-  return data || [];
+type BlogCategory = {
+  id: number;
+  name: string;
+};
+
+async function getCategories(): Promise<string[]> {
+  const { data, error } = await supabase
+    .from("blog_categories")
+    .select("id, name")
+    .order("name");
+
+  if (error) {
+    console.error("getCategories error:", error);
+    return ["All"];
+  }
+
+  const names = ((data as BlogCategory[]) || []).map((c) => c.name);
+  return ["All", ...names];
 }
 
-export default async function page() {
-  const blogs = await getBlogs();
+async function getBlogs(): Promise<BlogCard[]> {
+  // Try with category join first
+  const { data, error } = await supabase
+    .from("blogs")
+    .select("id, title, thumbnail_url, created_at, category_id, blog_categories(name)")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("getBlogs join error:", error);
+
+    // Fallback without join
+    const fallback = await supabase
+      .from("blogs")
+      .select("id, title, thumbnail_url, created_at, category_id")
+      .order("created_at", { ascending: false });
+
+    if (fallback.error) {
+      console.error(fallback.error);
+      return [];
+    }
+
+    return (fallback.data as BlogCard[]) || [];
+  }
+
+  return (data || []).map((blog: any) => ({
+    id: blog.id,
+    title: blog.title,
+    thumbnail_url: blog.thumbnail_url,
+    created_at: blog.created_at,
+    category_id: blog.category_id,
+    category_name: blog.blog_categories?.name || null,
+  }));
+}
+
+export default async function LoreWisdomPage() {
+  const [categories, blogs] = await Promise.all([getCategories(), getBlogs()]);
+
   return (
-    <main>
-      <div className="w-[90%] m-auto flex flex-col gap-10 py-[clamp(50px,1vh,240px)]">
-        <FadeInSection className="flex flex-col gap-5">
-          <div>
-            <h1 className="dashboard_head">Lore Wisdom</h1>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-5 w-[90%]">
-            {blogs.map((blog: any) => (
-              <Link
-                key={blog.id}
-                href={`/isle_dashboard/lore_wisdom/blog/${blog.id}`}
-                className="group"
-              >
-                <div className="bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-800 hover:border-zinc-700 transition-all">
-                  {blog.thumbnail_url && (
-                    <div className="relative h-64">
-                      <Image
-                        src={blog.thumbnail_url}
-                        alt={blog.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  )}
-                  <div className="p-8 flex flex-col gap-1">
-                    <h2 className="orange_subhead mb-3 group-hover:text-red-400 transition-colors">
-                      {blog.title}
-                    </h2>
-                    <p className="orange_body">Small Sub Text of some kind of description takes up to 2 lines max</p>
-                    <p className="orange_body opacity-50">
-                      {new Date(blog.created_at).toLocaleDateString("en-US", {
-                        month: "long",
-                        day: "numeric",
-                        year: "numeric",
-                      })}
-                    </p>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </FadeInSection>
-      </div>
+    <main className="w-[min(1200px,92%)] mx-auto py-10 md:py-16">
+      <FadeInSection className="mb-8">
+        <p className="text-sm uppercase tracking-[0.2em] text-zinc-500 mb-2">
+          Archive
+        </p>
+        <h1 className="dashboard_head">Lore Wisdom</h1>
+        <p className="text-zinc-400 mt-2 max-w-2xl">
+          Stories, notes, and fragments from the world of Nowhere Isle.
+        </p>
+      </FadeInSection>
+
+      <FadeInSection>
+        <LoreWisdomGallery blogs={blogs} categories={categories} />
+      </FadeInSection>
     </main>
   );
 }

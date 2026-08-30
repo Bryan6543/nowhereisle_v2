@@ -1,176 +1,174 @@
 "use client";
 
 import Image from "next/image";
-import FadeInSection from "../../../hooks/FadeInSection";
+import FadeInSection from "@/hooks/FadeInSection";
 
-export default function page() {
+const characters = [
+  {
+    name: "Mixama",
+    role: "Initiate",
+    image: "/chars/initiate_mixamo.png",
+    description:
+      "A sworn Inquisition fighter sent ahead to break the enemy line in the name of Maylon.",
+  },
+  {
+    name: "Cadet Mixamo",
+    role: "Cadet",
+    image: "/chars/cadet_mixamo.png",
+    description:
+      "Young, untested, and already marked by the fog. Still believes the capital can be saved.",
+  },
+  {
+    name: "Vicar Mixamo",
+    role: "Vicar",
+    image: "/chars/vicar_mixamo.png",
+    description:
+      "Carrier of forbidden rites. Keeps the squad alive when faith alone is not enough.",
+  },
+];
 
+export default function ExpeditionsPage() {
   return (
-    <div className="w-[90%] m-auto flex flex-col gap-10 py-[clamp(50px,1vh,240px)]">
-      <section className="h-[60vh] w-full relative">
+    <main className="w-[min(1200px,92%)] mx-auto flex flex-col gap-16 py-10 md:py-16">
+      {/* Hero */}
+      <section className="relative h-[50vh] md:h-[65vh] w-full overflow-hidden rounded-3xl border border-zinc-800">
         <video
           src="/sigil_video.mp4"
           autoPlay
           loop
           muted
-          className="absolute h-full w-full object-cover object-center opacity-85"
+          playsInline
+          className="absolute inset-0 h-full w-full object-cover object-center opacity-85"
         />
-        <div className="w-full h-full absolute z-20 flex flex-col gap-5 justify-center items-center">
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+        <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 gap-3">
           <h1 className="massive_bhead">SIGIL TACTICS</h1>
-          <h2 className="massive_shead opacity-75">LOST MAYLON</h2>
-          <p className="sub_head_sm">A brutal squad-based tactics RPG</p>
+          <h2 className="massive_shead opacity-80">LOST MAYLON</h2>
+          <p className="sub_head_sm text-zinc-300">
+            A brutal squad-based tactics RPG
+          </p>
         </div>
       </section>
 
-      <section className="flex flex-col gap-10">
-        <div className="lora_body flex flex-col gap-4 opacity-90 ">
-          <h1 className="dashboard_head">THE LOST HOLY CAPITAL</h1>
-          <p className="text-red-700 font-semibold">
+      {/* Lore intro */}
+      <section className="grid lg:grid-cols-2 gap-8 items-start">
+        <FadeInSection className="space-y-4">
+          <h2 className="dashboard_head">The Lost Holy Capital</h2>
+          <p className="text-red-500 font-semibold">
             A Brief Glimpse Into the Lore
           </p>
-          <p className="max-w-4xl">
+          <p className="lora_body text-zinc-300 leading-relaxed max-w-2xl">
             In the year 1472 of the Third Reckoning, the Holy Capital of Maylon
             fell silent. No messengers returned. No ravens flew from its towers.
             The city simply... vanished into the fog.
           </p>
-
-          <p className="max-w-4xl">
+          <p className="lora_body text-zinc-300 leading-relaxed max-w-2xl">
             Decades later, the Inquisition sends its most expendable force — you
             — to reclaim what was lost. Armed with forbidden sigils and dying
             faith, you must navigate a land where reality frays at the edges.
           </p>
-        </div>
+        </FadeInSection>
 
-        <div className="lora_body flex flex-col gap-4 bg-white/10 py-10 px-10 w-fit rounded-2xl">
-          <p className="text-red-700 font-semibold">The Final Edict</p>
-          <p className="max-w-4xl">
+        <FadeInSection className="bg-zinc-900/70 border border-zinc-800 rounded-3xl p-8 md:p-10">
+          <p className="text-red-500 font-semibold mb-3">The Final Edict</p>
+          <p className="lora_body text-zinc-200 leading-relaxed">
             “Enter the fog. Burn what is corrupted. Die with honor if you must.
             But bring back the Heart of Maylon or do not return at all.”
           </p>
-          <p className="opacity-75">— High Inquisitor Serath Veyra</p>
-        </div>
+          <p className="text-zinc-500 mt-5">— High Inquisitor Serath Veyra</p>
+        </FadeInSection>
       </section>
 
-      <section>
-        <div className=" m-auto flex flex-col gap-10 py-[clamp(50px,1vh,240px)]">
-          <FadeInSection className="flex flex-col gap-2.5">
-            <h1 className="dashboard_head">A World In The Making</h1>
-            <p className="orange_body md:w-4xl">
-              Lead the seventh doomed Inquisition expedition into corrupted
-              territory and fight to reclaim the Lost Holy Capital of Maylon.
-            </p>
+      {/* World in the making */}
+      <section className="space-y-10">
+        <FadeInSection className="space-y-3 max-w-3xl">
+          <h2 className="dashboard_head">A World In The Making</h2>
+          <p className="orange_body text-zinc-300">
+            Lead the seventh doomed Inquisition expedition into corrupted
+            territory and fight to reclaim the Lost Holy Capital of Maylon.
+          </p>
+        </FadeInSection>
+
+        <div className="grid md:grid-cols-2 gap-5">
+          <FadeInSection direction="left">
+            <Image
+              src="/img-3.png"
+              width={1000}
+              height={1000}
+              alt="World concept art"
+              className="w-full h-auto rounded-3xl shadow-2xl border border-zinc-800 object-cover"
+            />
           </FadeInSection>
-          <div className="md:relative md:block grid grid-cols-1 grid-rows-2 gap-2.5 md:gap-0">
-            <FadeInSection
-              direction="left"
-              className="md:col-start-1 md:row-start-1"
-            >
-              <Image
-                src={"/img-3.png"}
-                width={1000}
-                height={1000}
-                alt=""
-                className="w-[clamp(250px,100vw,850px)] shadow-2xl rounded-2xl"
-              />
-            </FadeInSection>
-            <FadeInSection
-              direction="right"
-              className="md:col-start-2 md:row-start-2 2xl:pb-50"
-            >
-              <Image
-                src={"/img-2.png"}
-                width={1000}
-                height={1000}
-                alt=""
-                className="w-[clamp(250px,100vw,850px)] shadow-2xl rounded-2xl 2xl:absolute 2xl:translate-x-[clamp(150px,100vw,600px)] 2xl:-translate-y-50"
-              />
-            </FadeInSection>
-          </div>
-          <div className="flex flex-col gap-8">
-            <FadeInSection direction="left">
-              <h1 className="massive_shead">SIGIL TACTICS</h1>
-              <h1 className="massive_bhead">LOST MAYLON</h1>
-            </FadeInSection>
-            <FadeInSection className="flex gap-8 opacity-75">
-              <Image
-                src={"/icons/kick.png"}
-                alt="Kick"
-                width={71}
-                height={79}
-                className="w-[clamp(56px,100vw,71px)]"
-              />
-              <Image
-                src={"/icons/steam.png"}
-                alt="steam"
-                width={85}
-                height={85}
-                className="w-[clamp(56px,100vw,71px)]"
-              />
-            </FadeInSection>
-          </div>
+          <FadeInSection direction="right">
+            <Image
+              src="/img-2.png"
+              width={1000}
+              height={1000}
+              alt="Expedition concept art"
+              className="w-full h-auto rounded-3xl shadow-2xl border border-zinc-800 object-cover"
+            />
+          </FadeInSection>
         </div>
+
+        <FadeInSection className="flex flex-col gap-6">
+          <div>
+            <h3 className="massive_shead">SIGIL TACTICS</h3>
+            <h3 className="massive_bhead">LOST MAYLON</h3>
+          </div>
+          <div className="flex items-center gap-6 opacity-80">
+            <Image
+              src="/icons/kick.png"
+              alt="Kickstarter"
+              width={71}
+              height={79}
+              className="w-14 md:w-[71px] h-auto"
+            />
+            <Image
+              src="/icons/steam.png"
+              alt="Steam"
+              width={85}
+              height={85}
+              className="w-14 md:w-[71px] h-auto"
+            />
+          </div>
+        </FadeInSection>
       </section>
 
-      {/* Meet the souls you will lead into darkness */}
-      <section className="w-[70%]">
-        <h1 className="dashboard_head">
-          Meet the souls you will lead into darkness
-        </h1>
-        <div className="flex">
-          <div>
-            <Image
-              src={"/chars/initiate_mixamo.png"}
-              width={1000}
-              height={1000}
-              alt=""
-              className="object-contain h-auto w-80"
-            />
-          </div>
-          <div className="flex flex-col justify-center gap-2 h-50">
-            <p className="font-bold lora_head">Mixama</p>
-            <p className="lora_body max-w-sm opacity-75">
-              A sworn Inquisition fighter sent ahead to break the enemy line in
-              the name of Maylon.
-            </p>
-          </div>
-        </div>
-        <div className="flex flex-row-reverse">
-          <div>
-            <Image
-              src={"/chars/cadet_mixamo.png"}
-              width={1000}
-              height={1000}
-              alt=""
-              className="object-contain h-auto w-80"
-            />
-          </div>
-          <div className="flex flex-col justify-center gap-2 h-50">
-            <p className="font-bold lora_head">Mixama</p>
-            <p className="lora_body max-w-sm opacity-75">
-              A sworn Inquisition fighter sent ahead to break the enemy line in
-              the name of Maylon.
-            </p>
-          </div>
-        </div>
-        <div className="flex">
-          <div>
-            <Image
-              src={"/chars/vicar_mixamo.png"}
-              width={1000}
-              height={1000}
-              alt=""
-              className="object-contain h-auto w-80"
-            />
-          </div>
-          <div className="flex flex-col justify-center gap-2 h-50">
-            <p className="font-bold lora_head">Mixama</p>
-            <p className="lora_body max-w-sm opacity-75">
-              A sworn Inquisition fighter sent ahead to break the enemy line in
-              the name of Maylon.
-            </p>
-          </div>
+      {/* Characters */}
+      <section className="space-y-8">
+        <FadeInSection>
+          <h2 className="dashboard_head max-w-3xl">
+            Meet the souls you will lead into darkness
+          </h2>
+        </FadeInSection>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {characters.map((character) => (
+            <FadeInSection
+              key={character.name}
+              className="rounded-3xl border border-zinc-800 bg-zinc-950 overflow-hidden hover:border-zinc-600 transition-all"
+            >
+              <div className="relative h-72 bg-zinc-900">
+                <Image
+                  src={character.image}
+                  alt={character.name}
+                  fill
+                  className="object-contain p-4"
+                />
+              </div>
+              <div className="p-5 space-y-2">
+                <p className="text-xs uppercase tracking-[0.15em] text-zinc-500">
+                  {character.role}
+                </p>
+                <h3 className="text-xl font-semibold">{character.name}</h3>
+                <p className="lora_body text-sm text-zinc-400 leading-relaxed">
+                  {character.description}
+                </p>
+              </div>
+            </FadeInSection>
+          ))}
         </div>
       </section>
-    </div>
+    </main>
   );
 }
