@@ -4,6 +4,8 @@ import FadeInSection from "@/hooks/FadeInSection";
 import ArtworksGallery from "@/components/dashboard/ArtworksGallery";
 import type { Artwork, ArtworkCategory } from "@/types";
 
+export const dynamic = 'force-dynamic'
+
 async function getCategories(): Promise<string[]> {
   const { data, error } = await supabase
     .from("artwork_categories")

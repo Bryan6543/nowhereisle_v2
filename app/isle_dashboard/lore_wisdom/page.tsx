@@ -16,6 +16,8 @@ type BlogCategory = {
   name: string;
 };
 
+export const dynamic = 'force-dynamic'
+
 async function getCategories(): Promise<string[]> {
   const { data, error } = await supabase
     .from("blog_categories")

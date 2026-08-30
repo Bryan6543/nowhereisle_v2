@@ -7,6 +7,8 @@ import FAQ from "../../components/multiple_use/FAQ";
 import GetInTouch from "../../components/multiple_use/GetInTouch";
 // import {supabase} from "../../../../lib/supabase";
 
+export const dynamic = 'force-dynamic'
+
 type ReportType = "studio" | "game" | "";
 type GameReportType = "bug" | "feedback" | "";
 

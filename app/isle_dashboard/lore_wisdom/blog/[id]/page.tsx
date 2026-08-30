@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import FadeInSection from "@/hooks/FadeInSection";
 
+export const dynamic = 'force-dynamic'
+
 export default async function BlogPost({
   params,
 }: {
