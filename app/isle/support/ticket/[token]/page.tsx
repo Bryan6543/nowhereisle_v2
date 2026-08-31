@@ -73,7 +73,7 @@ export default function PublicTicketPage() {
   if (error || !ticket) return <div className="p-10 text-center text-red-400">{error || 'Ticket not found'}</div>
 
   return (
-    <main className="max-w-3xl mx-auto p-8">
+    <main className="max-w-3xl mx-auto pt-40">
       <h1 className="text-3xl font-bold mb-2">Ticket {ticket.ticket_number}</h1>
       <p className="text-zinc-400 mb-1">{ticket.subject}</p>
       <p className="text-sm text-zinc-500 mb-8 capitalize">Status: {ticket.status.replaceAll('_', ' ')}</p>
