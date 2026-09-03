@@ -229,7 +229,7 @@ export default function Home() {
               className="h-[clamp(120px,100vh,200px)]  w-fit object-contain"
             />
             <h1 className="big_head">
-              NO WHER ISLE <br /> GAME STUDIO
+              NOWHERE ISLE <br /> GAME STUDIO
             </h1>
           </div>
           {/* Text Area */}
