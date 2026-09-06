@@ -1,11 +1,32 @@
+"use client"
+
 import Image from "next/image";
 import FadeInSection from "../../../hooks/FadeInSection";
+import { useLenis } from "../../../hooks/SmoothScrollProvider";
+import { useEffect} from "react";
 
 export default function page() {
+  const { enableSnap, disableSnap } = useLenis();
+
+  useEffect(() => {
+    // wait a tick so all sections exist in the DOM
+    const id = setTimeout(() => {
+      enableSnap();
+    }, 100);
+
+    return () => {
+      clearTimeout(id);
+      disableSnap();
+    };
+  }, [enableSnap, disableSnap]);
+
   return (
     <main>
       {/* Hero */}
-      <section className="relative w-full h-[40vh] md:h-[60vh] overflow-hidden">
+      <section
+        data-snap
+        className="relative w-full h-[40vh] md:h-[60vh] overflow-hidden"
+      >
         <Image
           src={"/img-4.png"}
           width={5120}
@@ -23,7 +44,7 @@ export default function page() {
       </section>
 
       {/* Find your way in */}
-      <section className="pt-10 md:pt-20">
+      <section data-snap className="pt-10 md:pt-20 h-fit w-full">
         <FadeInSection>
           <h1 className="text-center big_head">FIND YOUR WAY IN</h1>
         </FadeInSection>
@@ -90,7 +111,7 @@ export default function page() {
       </section>
 
       {/* Why Wanderers Join us */}
-      <section className="py-20">
+      <section data-snap className="h-fit w-full py-20">
         <div className="w-[80%] m-auto flex flex-col gap-15 py-[clamp(50px,1vh,240px)] text-center">
           <FadeInSection>
             <h1 className="big_head text-center">WHY WANDERERS JOIN US</h1>
@@ -122,7 +143,7 @@ export default function page() {
       </section>
 
       {/* Voices from the fog */}
-      <section className="h-[60vh] bg-gray-600/10">
+      <section data-snap className="h-[60vh] bg-gray-600/10">
         <div className="w-[80%] m-auto flex flex-col gap-10 py-[clamp(50px,1vh,240px)]">
           <FadeInSection>
             <h1 className="big_head text-center">VOICES FROM THE FOG</h1>
@@ -151,7 +172,7 @@ export default function page() {
       </section>
 
       {/* Ready to step in to the mist - Join Community */}
-      <section>
+      <section data-snap>
         <div className="w-[80%] m-auto flex flex-col gap-10 py-[clamp(50px,1vh,240px)]">
           <div className="flex flex-col justify-center items-center gap-10">
             <FadeInSection className="flex flex-col justify-center items-center gap-5">

@@ -21,146 +21,161 @@ import { playerExperienceSlides } from "../../data/SlidesData";
 import GetInTouch from "../../components/multiple_use/GetInTouch";
 import BehindTheFog from "../../components/multiple_use/BehindTheFog";
 import WorldMaking from "../../components/multiple_use/WorldMaking";
+import Link from "next/link";
+import { FaFantasyFlightGames } from "react-icons/fa";
+import { ImNewTab } from "react-icons/im";
+
+import { useLenis } from "../../hooks/SmoothScrollProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
-
 export default function Home() {
-  
   const [isActive, setIsActive] = useState(false);
   const conceptRealitySection = useRef<HTMLDivElement>(null);
-
-
+  const { enableSnap, disableSnap } = useLenis();
 
   useEffect(() => {
-  const ctx = gsap.context(() => {
-    // Starter Animations
-    const startAnimations = () => {
-      gsap
-        .timeline()
-        .to(".hero_title", {
-          y: 0,
-          opacity: 1,
-          duration: 1.1,
-          ease: "power4.out",
-        })
-        .to(
-          ".hero_subtitle",
-          {
+  const id = setTimeout(() => {
+    enableSnap();          // now finds only the clean top-level data-snap sections
+  }, 150);
+
+  return () => {
+    clearTimeout(id);
+    disableSnap();
+  };
+}, [enableSnap, disableSnap]);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Starter Animations
+      const startAnimations = () => {
+        gsap
+          .timeline()
+          .to(".hero_title", {
             y: 0,
             opacity: 1,
             duration: 1.1,
-            ease: "power3.out",
+            ease: "power4.out",
+          })
+          .to(
+            ".hero_subtitle",
+            {
+              y: 0,
+              opacity: 1,
+              duration: 1.1,
+              ease: "power3.out",
+            },
+            "-=0.8",
+          );
+      };
+
+      const handleStart = () => startAnimations();
+
+      document.addEventListener("preloaderComplete", handleStart);
+
+      // Always run on mount as fallback
+      requestAnimationFrame(() => {
+        startAnimations();
+      });
+
+      // Run immediately if already loaded before
+      if (sessionStorage.getItem("preloaderFinished")) {
+        startAnimations();
+      }
+
+      // SECTION 02 - Nowhere isle Introduction
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: ".s2_SliderContainer",
+            start: "top 45%",
+            end: "center 50%",
           },
-          "-=0.8",
+        })
+        .fromTo(
+          ".overlay-logo",
+          { x: "0%", opacity: "100%" },
+          { x: "-50vw", opacity: "0%", ease: "power3.out", duration: 2 },
         );
-    };
 
-     const handleStart = () => startAnimations();
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: ".s2_SliderContainer",
+            start: "top 40%",
+            end: "center 50%",
+          },
+        })
+        .fromTo(
+          ".s2_lg_logo",
+          { scale: 1.1, opacity: 0 },
+          { scale: 1, opacity: 1, ease: "back.inOut", duration: 0.5 },
+        )
+        .fromTo(
+          ".s2_lg_dsc",
+          { y: 50, opacity: 0 },
+          { y: 0, opacity: 1, ease: "power4.in", duration: 0.5 },
+        )
+        .fromTo(
+          ".s2_lg_fct",
+          { y: 50, opacity: 0 },
+          { y: 0, opacity: 1, ease: "power4.in", duration: 0.5 },
+        )
+        .fromTo(
+          ".s2_lg_link",
+          { y: 50, opacity: 0 },
+          { y: 0, opacity: 1, ease: "power4.in", duration: 0.5 },
+        );
 
-    document.addEventListener("preloaderComplete", handleStart);
+      // SECTION 05 - From Concept to Reality
+      if (conceptRealitySection.current) {
+        gsap.fromTo(
+          ".left-side-image",
+          { rotate: 0, x: 0 },
+          {
+            x: -400,
+            rotate: -10,
+            stagger: 1,
+            scrollTrigger: {
+              trigger: conceptRealitySection.current,
+              start: "1% 60%",
+              end: "20% 55%",
+              scrub: 1,
+            },
+          },
+        );
 
-    // Always run on mount as fallback
-    requestAnimationFrame(() => {
-      startAnimations();
+        gsap.fromTo(
+          ".right-side-image",
+          { rotate: 0, x: 0 },
+          {
+            x: 400,
+            rotate: 10,
+            stagger: 1,
+            scrollTrigger: {
+              trigger: conceptRealitySection.current,
+              start: "1% 60%",
+              end: "20% 55%",
+              scrub: 1,
+            },
+          },
+        );
+      }
     });
 
-
-    // Run immediately if already loaded before
-    if (sessionStorage.getItem("preloaderFinished")) {
-      startAnimations();
-    }
-
-    // SECTION 02 - Nowhere isle Introduction
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: ".s2_SliderContainer",
-          start: "top 45%",
-          end: "center 50%",
-        },
-      })
-      .fromTo(
-        ".overlay-logo",
-        { x: "0%", opacity: "100%" },
-        { x: "-50vw", opacity: "0%", ease: "power3.out", duration: 2 },
-      );
-
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: ".s2_SliderContainer",
-          start: "top 40%",
-          end: "center 50%",
-        },
-      })
-      .fromTo(
-        ".s2_lg_logo",
-        { scale: 1.1, opacity: 0 },
-        { scale: 1, opacity: 1, ease: "back.inOut", duration: 0.5 },
-      )
-      .fromTo(
-        ".s2_lg_dsc",
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, ease: "power4.in", duration: 0.5 },
-      )
-      .fromTo(
-        ".s2_lg_fct",
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, ease: "power4.in", duration: 0.5 },
-      )
-      .fromTo(
-        ".s2_lg_link",
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, ease: "power4.in", duration: 0.5 },
-      );
-
-    // SECTION 05 - From Concept to Reality
-    if (conceptRealitySection.current) {
-      gsap.fromTo(
-        ".left-side-image",
-        { rotate: 0, x: 0 },
-        {
-          x: -400,
-          rotate: -10,
-          stagger: 1,
-          scrollTrigger: {
-            trigger: conceptRealitySection.current,
-            start: "1% 60%",
-            end: "20% 55%",
-            scrub: 1,
-          },
-        },
-      );
-
-      gsap.fromTo(
-        ".right-side-image",
-        { rotate: 0, x: 0 },
-        {
-          x: 400,
-          rotate: 10,
-          stagger: 1,
-          scrollTrigger: {
-            trigger: conceptRealitySection.current,
-            start: "1% 60%",
-            end: "20% 55%",
-            scrub: 1,
-          },
-        },
-      );
-    }
-  });
-
-  return () => {
-    document.removeEventListener("preloaderComplete", () => {});
-    ctx.revert();
-  };
-}, []);
+    return () => {
+      document.removeEventListener("preloaderComplete", () => {});
+      ctx.revert();
+    };
+  }, []);
 
   return (
     <main>
       {/* Section 1 - Hero */}
-      <section className="h-fit  relative w-full flex-col gap-5 overflow-hidden">
+      <section
+        data-snap
+        className="h-fit  relative w-full flex-col gap-5 overflow-hidden"
+      >
         {/* Hero Carousel with Swiper */}
         <Swiper
           modules={[Autoplay]}
@@ -193,20 +208,32 @@ export default function Home() {
         </Swiper>
 
         {/* Text Overlay - Same position as before */}
-        <div className="absolute bottom-20 left-4 md:space-y-2 md:left-20 z-30 pointer-events-none">
+        <div className="absolute bottom-20 left-4 right-4 md:space-y-2 md:left-20 md:right-20 z-30 border-white/10 border-2 shadow-sm bg-black/30 backdrop-blur-xs p-4 md:p-10 rounded-xl flex flex-col items-start gap-2">
           <h1 className="head hero_title opacity-0 translate-y-20 ">
             Sigil Tactics: Lost Maylon
           </h1>
-          <p className="body_text hero_subtitle max-w-5xl opacity-0 translate-y-20">
+          <p className="body_text hero_subtitle max-w-3xl opacity-0 translate-y-20">
             A brutal squad turn-based tactics RPG about leading a doomed
             Inquisition expedition into corrupted territory to reclaim the Lost
             Holy Capital of Maylon.
           </p>
+          <Link
+            href={"/isle_dashboard/expeditions"}
+            className="hero_title font-bold flex gap-2 items-center transition-all duration-500 border-2 rounded-sm hover:border-white/20 hover:text-white hover:bg-black/20 bg-white text-black py-2.5 px-5"
+          >
+            <FaFantasyFlightGames size={26} />
+            <div className="flex gap-2 items-center">
+              <p className="lora_body">OPEN GAME PAGE</p>
+              <ImNewTab size={12} className="-translate-y-3 " />
+            </div>
+          </Link>
         </div>
       </section>
-
       {/* Section 2 - Nowhere Isle Introduction */}
-      <section className="relative h-auto lg:h-[80vh] overflow-hidden flex">
+      <section
+        data-snap
+        className="relative h-auto lg:h-[80vh] overflow-hidden flex"
+      >
         {/* Overlay */}
         <div className="s2_SliderContainer overlay-logo bg-black w-full h-full flex justify-center items-center z-10 absolute">
           <Image
@@ -229,7 +256,7 @@ export default function Home() {
               className="h-[clamp(120px,100vh,200px)]  w-fit object-contain"
             />
             <h1 className="big_head">
-              NO WHER ISLE <br /> GAME STUDIO
+              NOWHEREISLE <br /> GAME STUDIO
             </h1>
           </div>
           {/* Text Area */}
@@ -257,67 +284,48 @@ export default function Home() {
                 <p className="text-green-600">Sri Lanka</p>
               </div>
             </div>
-            <div
-              className="s2_lg_link flex z-90 gap-2 items-center justify-center relative cursor-pointer hover:opacity-70 hover:font-black transition-all duration-500 py-2"
-              onClick={() => setIsActive(!isActive)}
-              onMouseEnter={() => setIsActive(true)}
-              onMouseLeave={() => setIsActive(false)}
+            <Link
+              href={"/isle_dashboard/expeditions"}
+              className="hero_title font-bold flex gap-2 items-center transition-all duration-500 border-2 rounded-sm hover:border-white/20 hover:text-white hover:bg-black/20 bg-white text-black py-2.5 px-5 w-fit m-auto"
             >
-              <p className="font-bold capitalize body_text">View About Us</p>
-              <div className="relative pb-0.5">
-                <div
-                  className={`absolute h-0.5 transition-all duration-800 bg-linear-to-t from-transparent via-white to-transparent 
-                          ${isActive ? "w-40 -translate-y-5 -translate-x-38 rotate-0" : "w-2.5 -translate-y-0.5 rotate-200"}`}
-                />
-                <div
-                  className={`absolute h-0.5 transition-all duration-500 bg-linear-to-t from-transparent via-white to-transparent
-                            ${isActive ? "w-40 translate-y-5 -translate-x-38 rotate-0" : "w-2.5 translate-y-0.5 -rotate-200"}`}
-                />
+              <FaFantasyFlightGames size={26} />
+              <div className="flex gap-2 items-center">
+                <p className="lora_body">View Game Page</p>
+                <ImNewTab size={12} className="-translate-y-3 " />
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
-
       {/* Section 3 - A World in the Making */}
-      <WorldMaking />
-      
-
+      <section data-snap className="h-fit relative w-full">
+        <WorldMaking />
+      </section>
       {/* Section 4 - Meet Souls you will lead into darkness */}
-      <section>
-        <div className="w-[80%] m-auto flex flex-col gap-10 py-[clamp(50px,1vh,240px)]">
+      <section data-snap>
+        <div className="w-[80%] h-fit m-auto flex flex-col gap-10 py-[clamp(50px,1vh,240px)]">
           <FadeInSection className="flex flex-col gap-4">
             <h1 className="head">Meet the souls you will lead into darkness</h1>
             <p className="body_text md:w-xl">
               A specialized trio of Inquisition operatives deployed into the
               cursed ruins.
             </p>
-            <p className="body_text md:w-5xl">
+            <p className="body_text md:w-xl">
               United by faith and forged in conflict, these warriors of Maylon
               combine holy support, unbreakable frontline assault, and precise
               reconnaissance to purge corruption and complete their sacred
               mission.
             </p>
-            <FadeInSection
-              className="flex z-90 gap-2 items-center relative cursor-pointer hover:opacity-70 hover:font-black transition-all duration-500 py-2"
-              onClick={() => setIsActive(!isActive)}
-              onMouseEnter={() => setIsActive(true)}
-              onMouseLeave={() => setIsActive(false)}
+            <Link
+              href={"/isle_dashboard/expeditions"}
+              className="hero_title font-bold flex gap-2 items-center transition-all duration-500 border-2 rounded-sm hover:border-white/20 hover:text-white hover:bg-black/20 bg-white text-black py-2.5 px-5 w-fit"
             >
-              <p className="font-bold capitalize body_text">
-                View Character Details
-              </p>
-              <div className="relative pb-0.5">
-                <div
-                  className={`absolute h-0.5 transition-all duration-800 bg-linear-to-t from-transparent via-white to-transparent 
-                          ${isActive ? "w-56 -translate-y-5 -translate-x-56 rotate-0" : "w-2.5 -translate-y-0.5 rotate-200"}`}
-                />
-                <div
-                  className={`absolute h-0.5 transition-all duration-500 bg-linear-to-t from-transparent via-white to-transparent
-                            ${isActive ? "w-56 translate-y-5 -translate-x-56 rotate-0" : "w-2.5 translate-y-0.5 -rotate-200"}`}
-                />
+              <FaFantasyFlightGames size={26} />
+              <div className="flex gap-2 items-center">
+                <p className="lora_body">View Character Details</p>
+                <ImNewTab size={12} className="-translate-y-3 " />
               </div>
-            </FadeInSection>
+            </Link>
           </FadeInSection>
           <FadeInSection className="xl:w-2/3 flex">
             <Swiper
@@ -352,9 +360,9 @@ export default function Home() {
           </FadeInSection>
         </div>
       </section>
-
       {/* Section 5 - From Concept to Reality */}
       <section
+        data-snap
         ref={conceptRealitySection}
         className={`
               h-screen  overflow-hidden w-full relative py-20 `}
@@ -409,7 +417,7 @@ export default function Home() {
         </div>
 
         {/* Chidren Container */}
-        <div className="z-40 w-[80%] m-auto flex flex-col justify-center items-center h-full text-center gap-10">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 w-[80%] m-auto flex flex-col justify-center items-center h-full text-center gap-10">
           {/* Line top */}
           <FadeInSection className="flex flex-col items-center z-10">
             <div className="w-10 h-0.5 bg-linear-to-t from-transparent via-white to-transparent" />
@@ -425,24 +433,16 @@ export default function Home() {
               imagination, and the ability to thrive in a fast and exciting
               studio
             </p>
-            <div
-              className="flex z-90 gap-2 items-center relative cursor-pointer hover:opacity-70 hover:font-black transition-all duration-500 py-2"
-              onClick={() => setIsActive(!isActive)}
-              onMouseEnter={() => setIsActive(true)}
-              onMouseLeave={() => setIsActive(false)}
+            <Link
+              href={"isle_dashboard/artworks"}
+              className="hero_title font-bold flex gap-2 items-center transition-all duration-500 border-2 rounded-sm hover:border-white/20 hover:text-white hover:bg-black/20 bg-white text-black py-2.5 px-5 w-fit m-auto"
             >
-              <p className="font-bold capitalize body_text">View Our ArtWork</p>
-              <div className="relative pb-0.5">
-                <div
-                  className={`absolute h-0.5 transition-all duration-800 bg-linear-to-t from-transparent via-white to-transparent 
-                          ${isActive ? "w-40 -translate-y-5 -translate-x-42 rotate-0" : "w-2.5 -translate-y-0.5 rotate-200"}`}
-                />
-                <div
-                  className={`absolute h-0.5 transition-all duration-500 bg-linear-to-t from-transparent via-white to-transparent
-                            ${isActive ? "w-40 translate-y-5 -translate-x-42 rotate-0" : "w-2.5 translate-y-0.5 -rotate-200"}`}
-                />
+              <FaFantasyFlightGames size={26} />
+              <div className="flex gap-2 items-center">
+                <p className="lora_body">View Our Artworks</p>
+                <ImNewTab size={12} className="-translate-y-3 " />
               </div>
-            </div>
+            </Link>
           </FadeInSection>
           {/* Line Bottom */}
           <FadeInSection className="flex flex-col items-center z-10">
@@ -452,14 +452,21 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section 6 - Behind the Fog */}
-      <BehindTheFog />
-
+      {/* Section 6 - Behind the Fog */}\
+      <section data-snap className="h-fit relative w-full">
+        <BehindTheFog />
+      </section>
+      
       {/* Section 7 - Step in to the Mist (Email Subs) */}
-      <GetInTouch />
-
+      <section data-snap className="h-fit relative w-full">
+        <GetInTouch data-snap />
+      </section>
+      
       {/* Section 8 - FAQ */}
-      <FAQ />
+      <section data-snap className="h-fit relative w-full">
+        <FAQ data-snap />
+      </section>
+    
     </main>
   );
 }
