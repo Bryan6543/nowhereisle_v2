@@ -66,8 +66,8 @@ export default function BehindTheFog() {
             >
               <h1 className="head">ARTISTIC OBSESSION</h1>
               <p className="text-body md:w-md">
-                Every frame, every particle, and every shadow is crafted with
-                intention.
+                We redo things. A lot. The gallery has the same enemy at every
+                stage we put it through.
               </p>
             </FadeInSection>
             <div className="flex justify-end">
@@ -107,8 +107,9 @@ export default function BehindTheFog() {
             <FadeInSection direction="left" className="flex flex-col gap-2.5">
               <h1 className="head">PLAYER EXPERIENCE</h1>
               <p className="text-body md:w-md">
-                We design for those who enjoy slow discovery, deep immersion,
-                and emotional payoff.
+                This is a slow game. You will lose people you spent hours on,
+                and the game will not soften it. We are making it for players
+                who want that to matter.
               </p>
             </FadeInSection>
             <div>

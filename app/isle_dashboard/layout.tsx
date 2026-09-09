@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import Sidebar from "../../components/Sidebar";
 
 export const metadata: Metadata = {
-  title: "Dashboard | NoWhere Isle",
-  description: "Blog Management Dashboard",
+  title: "Inside the Isle | Nowhere Isle Studio",
+  description: "Art, lore and updates from Nowhere Isle Studio and Kradel Tactics.",
 };
 
 export default function DashboardLayout({

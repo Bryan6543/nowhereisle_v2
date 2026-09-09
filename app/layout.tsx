@@ -67,25 +67,27 @@ const lora = Lora({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://nowhereisle.com"),
-  title: "NoWhere Isle",
-  description: "Discover the official NoWhere Isle Game Studio ",
+  title: "Nowhere Isle Studio",
+  description:
+    "Nowhere Isle Studio is an indie game studio in Colombo, Sri Lanka. We are making Kradel Tactics, a turn-based tactics RPG for PC.",
 
-  keywords: ["gamestudio", "NoWhere Isle"],
-  authors: [{ name: "Bryan Fernando" }],
-  creator: "Digital Power Grid",
+  keywords: ["Nowhere Isle Studio", "Kradel Tactics", "indie game studio", "Sri Lanka"],
+  authors: [{ name: "Nowhere Isle Studio" }],
+  creator: "Nowhere Isle Studio",
+  other: { designer: "Bryan Fernando" },
 
   openGraph: {
-    title: "NoWhere Isle",
+    title: "Nowhere Isle Studio",
     description:
-      "Discover the mysterious NoWhere Isle - A beautiful island adventure awaits.",
+      "Kradel Tactics, a turn-based tactics RPG from Nowhere Isle Studio. Lead a doomed expedition into the lost capital of Maylon.",
     url: "https://nowhereisle.com",
-    siteName: "NoWhere Isle",
+    siteName: "Nowhere Isle Studio",
     images: [
       {
         url: "/opengraph-image.jpg",
         width: 1200,
         height: 630,
-        alt: "NoWhere Isle - Beautiful Island Landscape",
+        alt: "Nowhere Isle Studio logo",
       },
     ],
     locale: "en_US",

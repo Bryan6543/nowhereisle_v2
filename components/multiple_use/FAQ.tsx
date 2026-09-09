@@ -12,20 +12,20 @@ const studiofaqs: StudioFAQItem[] = [
   {
     question: "What is Nowhere Isle Studio?",
     answer:
-      "Nowhere Isle Studios is an independent game studio creating single-player narrative and strategy games with rich worldbuilding, distinctive systems, and a strong sense of atmosphere.",
+      "Six people in Colombo, Sri Lanka, making turn-based tactics games with a story in them. Our first is Kradel Tactics.",
   },
   {
-    question: "Where is NowhereIsle based?",
-    answer: "Sri Lanka, Colombo",
+    question: "Where is Nowhere Isle Studio based?",
+    answer: "Colombo, Sri Lanka.",
   },
   {
     question: "Are you hiring or looking for collaborators?",
     answer:
-      "We're always open to connecting with talented artists, programmers, composers, and writers. Feel free to reach out via email",
+      "Sometimes. Send a short note and a link to your work to studio@nowhereisle.com, and say what you would want to do on the game.",
   },
   {
     question: "I found a bug / have feedback. How do I report it?",
-    answer: "File a feedback or bug report on the website.",
+    answer: "Use the Support page. Pick the game, pick bug or feedback, and tell us what happened.",
   },
 ];
 
@@ -36,9 +36,9 @@ type GameFAQItem = {
 
 const gamefaqs: GameFAQItem[] = [
   {
-    question: "What is Sigil Tactics: Lost Maylon?",
+    question: "What is Kradel Tactics?",
     answer:
-      "A brutal squad-based turn-based tactics RPG about leading a doomed Inquisition expedition into corrupted territory to reclaim the Lost Holy Capital of Maylon.",
+      "A turn-based tactics RPG. You lead the seventh expedition into the heart of Old Maylon as its Grand Inquisitor. Wounds do not heal on their own, corruption spreads, and resolve runs out.",
   },
   {
     question: "What platform is it coming to?",

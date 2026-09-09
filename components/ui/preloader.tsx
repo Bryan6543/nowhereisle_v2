@@ -106,7 +106,7 @@ export default function Preloader() {
             className="max-w-[clamp(200px,8vw,400px)] h-auto"
           />
           <h1 className="pre_loader_head text-center">
-            NOWHERE ISLE <br /> GAME STUDIO
+            NOWHERE ISLE <br /> STUDIO
           </h1>
         </div>
 
@@ -124,7 +124,7 @@ export default function Preloader() {
         </div>
 
         <div className="text-zinc-500 font-lilex text-sm mt-2 tracking-[3px]">
-          ENTETERING ISLE ...
+          ENTERING THE ISLE ...
         </div>
       </div>
     </div>

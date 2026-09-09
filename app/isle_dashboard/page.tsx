@@ -28,9 +28,9 @@ export default async function Home() {
       <FadeInSection className="flex flex-col gap-4 max-w-3xl">
         <h2 className="dashboard_head">Into the Lost Holy Capital</h2>
         <p className="lora_body text-zinc-300">
-          Lead a desperate Inquisition force through corrupted lands to reclaim
-          the fallen city of Maylon. Make hard choices. Sacrifice your squad.
-          Uncover ancient sigils that twist reality itself.
+          Kradel Tactics is the whole reason the studio exists. Check out our
+          art gallery and the lore posts while the project is still under
+          development.
         </p>
         <Image
           src="/icons/steam_wishlist.png"

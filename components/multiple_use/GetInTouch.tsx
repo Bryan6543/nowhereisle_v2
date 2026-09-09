@@ -58,8 +58,10 @@ export default function GetInTouch() {
           <FadeInSection className="flex flex-col justify-center items-center gap-5">
             <h1 className="head text-center">STEP INTO THE MIST</h1>
             <p className="body_text md:w-xl text-center">
-              Receive rare updates, behind-the-scenes lore, and early access
-              to new worlds.
+              We send a mail when there is something worth sending. A playable
+              build, the Steam page going live, a piece of lore we finished. A
+              few a year, not a few a week, so don't worry about getting
+              spammed.
             </p>
           </FadeInSection>
 
