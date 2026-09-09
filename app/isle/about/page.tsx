@@ -1,15 +1,34 @@
 "use client";
 
+import { useEffect } from "react";
+
 import Image from "next/image";
 import FadeInSection from "../../../hooks/FadeInSection";
 import BehindTheFog from "../../../components/multiple_use/BehindTheFog";
 import GetInTouch from "../../../components/multiple_use/GetInTouch";
+import { useLenis } from "../../../hooks/SmoothScrollProvider";
 
 export default function page() {
+  const { enableSnap, disableSnap } = useLenis();
+
+  useEffect(() => {
+    // wait a tick so all sections exist in the DOM
+    const id = setTimeout(() => {
+      enableSnap();
+    }, 100);
+
+    return () => {
+      clearTimeout(id);
+      disableSnap();
+    };
+  }, [enableSnap, disableSnap]);
   return (
     <main>
       {/* Hero */}
-      <section className="relative w-full h-[40vh] md:h-[60vh] overflow-hidden">
+      <section
+        data-snap
+        className="relative w-full h-[40vh] md:h-[60vh] overflow-hidden"
+      >
         <Image
           src={"/img-4.png"}
           width={5120}
@@ -19,15 +38,14 @@ export default function page() {
         />
         <FadeInSection className="absolute w-full h-full flex flex-col justify-center items-center gap- z-20 bg-black/40 text-center">
           <h2 className="body_text text-red-800 font-bold">ESTABLISTED 2024</h2>
-          <h1 className="big_head">NOWHERISLE STUDIOS</h1>
+          <h1 className="big_head">NOWHEREISLE STUDIOS</h1>
           <p className="body_text">
             A SMALL STUDIO WHERE SMALL IDEAS FIND THEIR HOME.
           </p>
         </FadeInSection>
       </section>
-
       {/* Mission / Vission */}
-      <section>
+      <section data-snap className="h-fit w-full">
         <div className="w-[80%] m-auto gap-10 py-[clamp(50px,1vh,240px)] font_lilita grid grid-cols-1 md:grid-cols-2">
           <FadeInSection
             direction="left"
@@ -45,7 +63,10 @@ export default function page() {
               A SMALL STUDIO WHERE SMALL IDEAS FIND THEIR HOME.
             </p>
           </FadeInSection>
-          <FadeInSection direction="right" className="flex flex-col gap-4 w-[90%]">
+          <FadeInSection
+            direction="right"
+            className="flex flex-col gap-4 w-[90%]"
+          >
             <h2 className="text-[clamp(20px,7px,16px)] text-red-800">
               Our Vision
             </h2>
@@ -56,9 +77,8 @@ export default function page() {
           </FadeInSection>
         </div>
       </section>
-
       {/* Our Story */}
-      <section className=" py-[clamp(50px,1vh,240px)]">
+      <section data-snap className=" py-[clamp(50px,1vh,240px)]">
         <FadeInSection className="bg-[#313131] pb-50">
           <h1 className="big_head translate-x-[10%] translate-y-[-50%] ">
             OUR STORY
@@ -80,9 +100,8 @@ export default function page() {
           </div>
         </FadeInSection>
       </section>
-
       {/* Team */}
-      <section>
+      <section data-snap>
         <FadeInSection className="flex flex-col gap-10">
           <div className="relative -translate-y-50 w-full flex justify-center h-75 md:h-80">
             <Image
@@ -167,12 +186,14 @@ export default function page() {
           </div>
         </FadeInSection>
       </section>
-
-      {/* Behind the Fog - Repeat */}
-      <BehindTheFog />
-
+      {/* Behind the Fog - Repeat */}\
+      <div data-snap className="h-fit w-full">
+        <BehindTheFog />
+      </div>
       {/* Get in Touch - Repeat */}
-      <GetInTouch />
+      <div data-snap className="h-fit w-full">
+        <GetInTouch />
+      </div>
     </main>
   );
 }

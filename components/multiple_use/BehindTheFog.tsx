@@ -13,13 +13,13 @@ import "swiper/css/pagination";
 
 export default function BehindTheFog() {
   return (
-    <section>
+    <section className="h-fit w-full">
         <div className="w-[80%] m-auto flex flex-col gap-10 py-[clamp(50px,1vh,240px)]">
           <FadeInSection>
             <h1 className="big_head text-center">BEHIND THE FOG</h1>
           </FadeInSection>
           {/* World Building */}
-          <div className="flex flex-col gap-12">
+          <section className="flex flex-col gap-12">
             <FadeInSection direction="left" className="flex flex-col gap-2.5">
               <h1 className="head">WORLD BUILDING</h1>
               <p className="text-body md:w-md">
@@ -57,7 +57,7 @@ export default function BehindTheFog() {
                 ))}
               </Swiper>
             </FadeInSection>
-          </div>
+          </section>
           {/* Artistic Obsession */}
           <div className="flex flex-col gap-12">
             <FadeInSection
@@ -112,7 +112,7 @@ export default function BehindTheFog() {
               </p>
             </FadeInSection>
             <div>
-              <FadeInSection className="w-full  flex">
+              <FadeInSection  className="w-full  flex">
                 <Swiper
                   modules={[Autoplay]}
                   spaceBetween={20}

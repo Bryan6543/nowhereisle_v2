@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import { NavLinks } from "@/data/Data";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -12,7 +14,9 @@ export default function Navbar() {
   const navRef = useRef<HTMLElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
-
+  const pathname = usePathname();
+  const [isPending, startTransition] = useTransition();
+  const [loadingHref, setLoadingHref] = useState<string | null>(null);
   const lastScroll = useRef(0);
 
   useEffect(() => {
@@ -143,13 +147,20 @@ export default function Navbar() {
     }
   }, [menuOpen]);
 
+  const handleClick = (href: string) => {
+    setLoadingHref(href);
+    startTransition(() => {
+      // navigation happens via Link, this just tracks the pending state
+    });
+  };
+
   return (
     <>
-    <div className="text-center py-2 z-9999 fixed top-0 bg-black w-full text-xs text-yellow-500">ISLE UNDER|CONSTRUCTION</div>
+      {/* <div className="text-center py-2 z-9999 fixed top-0 bg-black w-full text-xs text-yellow-500">ISLE UNDER|CONSTRUCTION</div> */}
       {/* Navbar */}
       <nav
         ref={navRef}
-        className="mt-5 nav_bar fixed top-0 left-0 z-50 flex h-25 w-screen justify-between bg-black/20 backdrop-blur-sm opacity-0 -translate-y-30"
+        className="nav_bar fixed top-0 left-0 z-50 flex h-25 w-screen justify-between bg-black/20 backdrop-blur-sm opacity-0 -translate-y-30"
       >
         <div className="mx-auto flex h-full w-[80%] items-center justify-between">
           <Link href={"/isle"} className="w-fit h-full">
@@ -162,19 +173,43 @@ export default function Navbar() {
             />
           </Link>
 
-          <div className="nav_links nav_link_text translate-x-120 opacity-0 hidden items-center gap-9 md:flex">
-            <Link href={"/isle_dashboard"}>
-              <p className="cursor-pointer">Isle Dashboard</p>
-            </Link>
-            <Link href={"/isle/community"}>
-              <p className="cursor-pointer">Community</p>
-            </Link>
-            <Link href={"/isle/support"}>
-              <p className="cursor-pointer">Support</p>
-            </Link>
-            <Link href={"/isle/about"}>
-              <p className="cursor-pointer">About</p>
-            </Link>
+          <div className="nav_links nav_link_text  translate-x-120 opacity-0 hidden gap-8 md:flex justify-center items-center p-1 border-2 border-white/10 rounded-xl">
+            {NavLinks.map((link) => {
+              const isActive =
+                pathname === link.href || pathname.startsWith(link.href + "/isle/");
+              const isLoading = isPending && loadingHref === link.href;
+
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => handleClick(link.href)}
+                  className={`
+              relative cursor-pointer transition-all duration-200  py-2.5 px-4 rounded-xl
+              ${
+                isActive
+                  ? "text-white font-semibold bg-red-300/20 border-red-500/70 border" // active state
+                  : "text-white/50 hover:text-red-600 bg-red-50/10 hover:bg-white font-bold" // default + hover
+              }
+              ${isLoading ? "opacity-60 pointer-events-none" : ""}
+            `}
+                >
+                  <p className="relative">
+                    {link.name}
+
+                    {/* Optional active underline */}
+                    {/* {isActive && (
+                      <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-red-600 rounded-full" />
+                    )} */}
+
+                    {/* Loading spinner next to the link */}
+                    {isLoading && (
+                      <span className="ml-2 inline-block h-3 w-3 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                    )}
+                  </p>
+                </Link>
+              );
+            })}
           </div>
 
           <button
