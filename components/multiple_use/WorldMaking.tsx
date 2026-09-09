@@ -12,8 +12,12 @@ export default function WorldMaking() {
         <FadeInSection className="flex flex-col gap-2.5">
           <h1 className="head">A World In The Making</h1>
           <p className="body_text md:w-4xl">
-            Lead the seventh doomed Inquisition expedition into corrupted
-            territory and fight to reclaim the Lost Holy Capital of Maylon.
+            You run the base and the people in it. Each expedition you pick a
+            squad, lead them into the ruins of Old Maylon, and come back with
+            what you can. Wounds, corruption and shaken resolve come home with
+            them, so who you send next time is never a simple choice. Reach the
+            heart of the city and claim the lost capital of Maylon or die
+            trying.
           </p>
         </FadeInSection>
         <div className="md:relative md:block grid grid-cols-1 grid-rows-2 gap-2.5 md:gap-0">
@@ -44,8 +48,8 @@ export default function WorldMaking() {
         </div>
         <div className="flex flex-col gap-8">
           <FadeInSection direction="left">
-            <h1 className="massive_shead">SIGIL TACTICS</h1>
-            <h1 className="massive_bhead">LOST MAYLON</h1>
+            <h1 className="massive_shead">KRADEL</h1>
+            <h1 className="massive_bhead">TACTICS</h1>
           </FadeInSection>
           <FadeInSection className="flex gap-8 opacity-75">
             <Image

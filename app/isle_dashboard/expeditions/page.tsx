@@ -5,25 +5,25 @@ import FadeInSection from "@/hooks/FadeInSection";
 
 const characters = [
   {
-    name: "Mixama",
-    role: "Initiate",
+    name: "Initiate",
+    role: "Sword, hammer or axe",
     image: "/chars/initiate_mixamo.png",
     description:
-      "A sworn Inquisition fighter sent ahead to break the enemy line in the name of Maylon.",
+      "The front line. Whatever comes out of the fog reaches the Initiate first, and the rest of the squad plans around that.",
   },
   {
-    name: "Cadet Mixamo",
-    role: "Cadet",
+    name: "Cadet",
+    role: "Bow or crossbow",
     image: "/chars/cadet_mixamo.png",
     description:
-      "Young, untested, and already marked by the fog. Still believes the capital can be saved.",
+      "Stays behind the Initiate, picks the target, and sets up the shot that ends the fight.",
   },
   {
-    name: "Vicar Mixamo",
-    role: "Vicar",
+    name: "Vicar",
+    role: "Orb, book or staff",
     image: "/chars/vicar_mixamo.png",
     description:
-      "Carrier of forbidden rites. Keeps the squad alive when faith alone is not enough.",
+      "Keeps the other two standing. When someone's resolve starts to go, the Vicar is the one who notices first.",
   },
 ];
 
@@ -42,8 +42,8 @@ export default function ExpeditionsPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 gap-3">
-          <h1 className="massive_bhead">SIGIL TACTICS</h1>
-          <h2 className="massive_shead opacity-80">LOST MAYLON</h2>
+          <h1 className="massive_shead">KRADEL</h1>
+          <h2 className="massive_bhead">TACTICS</h2>
           <p className="sub_head_sm text-zinc-300">
             A brutal squad-based tactics RPG
           </p>
@@ -58,24 +58,23 @@ export default function ExpeditionsPage() {
             A Brief Glimpse Into the Lore
           </p>
           <p className="lora_body text-zinc-300 leading-relaxed max-w-2xl">
-            In the year 1472 of the Third Reckoning, the Holy Capital of Maylon
-            fell silent. No messengers returned. No ravens flew from its towers.
-            The city simply... vanished into the fog.
+            The Golden Citadel was the ancient capital of Maylon when Maylon
+            was an empire. It has been dead for six thousand years. The blight
+            that killed it has not stopped at the walls.
           </p>
           <p className="lora_body text-zinc-300 leading-relaxed max-w-2xl">
-            Decades later, the Inquisition sends its most expendable force — you
-            — to reclaim what was lost. Armed with forbidden sigils and dying
-            faith, you must navigate a land where reality frays at the edges.
+            Once every thousand years the King sends an expedition to take it
+            back. Seven kings, seven expeditions, and none of them returned.
+            King Artax Silvex has just sent the seventh, under the Grand
+            Inquisition. You are in command of it.
           </p>
         </FadeInSection>
 
         <FadeInSection className="bg-zinc-900/70 border border-zinc-800 rounded-3xl p-8 md:p-10">
-          <p className="text-red-500 font-semibold mb-3">The Final Edict</p>
-          <p className="lora_body text-zinc-200 leading-relaxed">
-            “Enter the fog. Burn what is corrupted. Die with honor if you must.
-            But bring back the Heart of Maylon or do not return at all.”
+          <p className="lora_body text-zinc-200 leading-relaxed text-xl">
+            Seven kings. Seven expeditions. Six thousand years. Nothing has
+            ever come back.
           </p>
-          <p className="text-zinc-500 mt-5">— High Inquisitor Serath Veyra</p>
         </FadeInSection>
       </section>
 
@@ -84,8 +83,12 @@ export default function ExpeditionsPage() {
         <FadeInSection className="space-y-3 max-w-3xl">
           <h2 className="dashboard_head">A World In The Making</h2>
           <p className="orange_body text-zinc-300">
-            Lead the seventh doomed Inquisition expedition into corrupted
-            territory and fight to reclaim the Lost Holy Capital of Maylon.
+            You run the base and the people in it. Each expedition you pick a
+            squad, lead them into the ruins of Old Maylon, and come back with
+            what you can. Wounds, corruption and shaken resolve come home with
+            them, so who you send next time is never a simple choice. Reach the
+            heart of the city and claim the lost capital of Maylon or die
+            trying.
           </p>
         </FadeInSection>
 
@@ -112,8 +115,8 @@ export default function ExpeditionsPage() {
 
         <FadeInSection className="flex flex-col gap-6">
           <div>
-            <h3 className="massive_shead">SIGIL TACTICS</h3>
-            <h3 className="massive_bhead">LOST MAYLON</h3>
+            <h3 className="massive_shead">KRADEL</h3>
+            <h3 className="massive_bhead">TACTICS</h3>
           </div>
           <div className="flex items-center gap-6 opacity-80">
             <Image

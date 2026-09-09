@@ -145,7 +145,7 @@ export default function Navbar() {
 
   return (
     <>
-    <div className="text-center py-2 z-9999 fixed top-0 bg-black w-full text-xs text-yellow-500">ISLE UNDER|CONSTRUCTION</div>
+    {/*<div className="text-center py-2 z-9999 fixed top-0 bg-black w-full text-xs text-yellow-500">ISLE UNDER|CONSTRUCTION</div>*/}
       {/* Navbar */}
       <nav
         ref={navRef}
@@ -164,7 +164,7 @@ export default function Navbar() {
 
           <div className="nav_links nav_link_text translate-x-120 opacity-0 hidden items-center gap-9 md:flex">
             <Link href={"/isle_dashboard"}>
-              <p className="cursor-pointer">Isle Dashboard</p>
+              <p className="cursor-pointer">Inside the Isle</p>
             </Link>
             <Link href={"/isle/community"}>
               <p className="cursor-pointer">Community</p>
@@ -199,9 +199,9 @@ export default function Navbar() {
             <Link href={"/isle/"}>
               <button onClick={() => setMenuOpen(false)}>Home</button>
             </Link>
-            <Link href={"/isle/"}>
+            <Link href={"/isle_dashboard"}>
               <button className="" onClick={() => setMenuOpen(false)}>
-                Isle Dashboard
+                Inside the Isle
               </button>
             </Link>
             <Link href={"/isle/community"}>
@@ -217,13 +217,9 @@ export default function Navbar() {
 
           <div className="flex flex-col md:flex-row md:justify-between gap-7 text-xs">
             <hr />
-            <div className="flex justify-between opacity-70 gap-5">
-              <p>Privacy Policy</p>
-              <p>Terms and Conditions</p>
-            </div>
             <div className="flex justify-center items-center">
               <p className="opacity-70 text-center">
-                © 2026 NowhereIsle Studios. All Rights Reserved.
+                © {new Date().getFullYear()} Nowhere Isle Studio. All rights reserved.
               </p>
             </div>
           </div>

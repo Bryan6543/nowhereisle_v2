@@ -18,8 +18,8 @@ export default function page() {
           className="object-cover h-full absolute z-0 scale-animation-hero"
         />
         <FadeInSection className="absolute w-full h-full flex flex-col justify-center items-center gap- z-20 bg-black/40 text-center">
-          <h2 className="body_text text-red-800 font-bold">ESTABLISTED 2024</h2>
-          <h1 className="big_head">NOWHERISLE STUDIOS</h1>
+          <h2 className="body_text text-red-800 font-bold">ESTABLISHED 2025</h2>
+          <h1 className="big_head">NOWHERE ISLE STUDIO</h1>
           <p className="body_text">
             A SMALL STUDIO WHERE SMALL IDEAS FIND THEIR HOME.
           </p>
@@ -37,12 +37,8 @@ export default function page() {
               Our Mission
             </h2>
             <p className="text-[clamp(32px,7px,20px)]">
-              TO BECOME SRI LANKA'S FIRST GLOBALLY SUCCESSFUL GAME STUDIO AND TO
-              BE BEST AT WHAT WE DO. UNFORGETTABLE STORYTELLING AND DEEPLY
-              ENGAGING GAMEPLAY.
-            </p>
-            <p className="text-[clamp(20px,7px,16px)] opacity-75">
-              A SMALL STUDIO WHERE SMALL IDEAS FIND THEIR HOME.
+              TO BECOME SRI LANKA'S FIRST GLOBALLY SUCCESSFUL GAME STUDIO, AND
+              TO GET THERE BY MAKING GAMES WE WOULD PLAY OURSELVES.
             </p>
           </FadeInSection>
           <FadeInSection direction="right" className="flex flex-col gap-4 w-[90%]">
@@ -50,7 +46,7 @@ export default function page() {
               Our Vision
             </h2>
             <p className="text-[clamp(32px,7px,20px)]">
-              FULLY INDEPEND WITH NO COMPRISE OVER CREATIVE DECISION TO CREATE
+              FULLY INDEPENDENT WITH NO COMPROMISE OVER CREATIVE DECISIONS TO CREATE
               WORLDS WE WANT TO PLAY.
             </p>
           </FadeInSection>
@@ -65,17 +61,36 @@ export default function page() {
           </h1>
           <div className="w-[80%] m-auto lora_body  flex flex-col gap-5">
             <div className="w-[80%] m-auto flex flex-col gap-10 font_quot">
-              <p>
-                Nowhere Isle Studios is an independent game studio that dares to
-                venture into the unknown strange worlds of the mind, crafting
-                atmospheric strategy games filled with strong identity,
-                intricate lore, meaningful tactics, and underlying mystery.
-              </p>
-              <p>
-                Our current project is Sigil Tactics: Lost Maylon, a brutal
-                tactical RPG about the Inquisition's seventh doomed expedition
-                sent to reclaim a holy capital swallowed by corruption
-              </p>
+              <div className="flex flex-col gap-2">
+                <h3 className="sub_head_sm text-red-700">
+                  How did the six of you end up in a room together?
+                </h3>
+                <p>
+                  Three friends who love playing games and had nothing better to
+                  do with our lives: Win Khant Kyi, Lin Kyaw Khant and
+                  Akeil Mohideen. The rest we picked up along the way in Colombo.
+                </p>
+              </div>
+              <div className="flex flex-col gap-2">
+                <h3 className="sub_head_sm text-red-700">
+                  When did it become a studio?
+                </h3>
+                <p>When we finished our degrees and saw the job market...</p>
+              </div>
+              <div className="flex flex-col gap-2">
+                <h3 className="sub_head_sm text-red-700">Why &quot;Nowhere Isle&quot;?</h3>
+                <p>
+                  Nowhere Isle is not a place. It is the state we are in when we
+                  hang out together, hidden from the world and the isolation we
+                  feel in it.
+                </p>
+              </div>
+              <div className="flex flex-col gap-2">
+                <h3 className="sub_head_sm text-red-700">
+                  What is the studio doing this year?
+                </h3>
+                <p>Road to Early Access, road to the heart of Old Maylon.</p>
+              </div>
             </div>
           </div>
         </FadeInSection>
@@ -161,7 +176,7 @@ export default function page() {
               </div>
               <div>
                 <h2 className="sub_head">Spartan138</h2>
-                <h3 className="sub_head_sm text-red-700">Music composer</h3>
+                <h3 className="sub_head_sm text-red-700">Music Composer</h3>
               </div>
             </div>
           </div>

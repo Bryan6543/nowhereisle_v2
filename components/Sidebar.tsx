@@ -7,8 +7,8 @@ import { Home, Gamepad2, BookOpen, Bolt, Menu, X } from "lucide-react";
 import Image from "next/image";
 
 const navItems = [
-  { name: "Lore", href: "/isle_dashboard", icon: Home },
-  { name: "Doomed Expedition", href: "/isle_dashboard/expeditions", icon: Gamepad2 },
+  { name: "Home", href: "/isle_dashboard", icon: Home },
+  { name: "Kradel Tactics", href: "/isle_dashboard/expeditions", icon: Gamepad2 },
   { name: "Artworks", href: "/isle_dashboard/artworks", icon: Bolt },
   { name: "Lore Wisdom", href: "/isle_dashboard/lore_wisdom", icon: BookOpen },
 ];

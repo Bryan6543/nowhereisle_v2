@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "NoWhere Isle - Home",
-  description: "Discover the mysterious NoWhere Isle – A beautiful island adventure awaits.",
+  title: "Kradel Tactics | Nowhere Isle Studio",
+  description: "Kradel Tactics, a turn-based tactics RPG from Nowhere Isle Studio.",
   openGraph: {
-    title: "NoWhere Isle",
-    description: "Discover the mysterious NoWhere Isle...",
+    title: "Kradel Tactics",
+    description: "Kradel Tactics, a turn-based tactics RPG from Nowhere Isle Studio.",
     images: [{ url: "/opengraph-image.jpg" }],
   },
 };

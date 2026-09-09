@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import FadeInSection from "../../hooks/FadeInSection";
@@ -195,12 +196,12 @@ export default function Home() {
         {/* Text Overlay - Same position as before */}
         <div className="absolute bottom-20 left-4 md:space-y-2 md:left-20 z-30 pointer-events-none">
           <h1 className="head hero_title opacity-0 translate-y-20 ">
-            Sigil Tactics: Lost Maylon
+            Kradel Tactics
           </h1>
           <p className="body_text hero_subtitle max-w-5xl opacity-0 translate-y-20">
-            A brutal squad turn-based tactics RPG about leading a doomed
-            Inquisition expedition into corrupted territory to reclaim the Lost
-            Holy Capital of Maylon.
+            Lead the seventh expedition into the heart of Old Maylon as its
+            Grand Inquisitor. Wounds do not heal on their own, corruption
+            spreads, and resolve runs out. A turn-based tactics RPG.
           </p>
         </div>
       </section>
@@ -229,15 +230,16 @@ export default function Home() {
               className="h-[clamp(120px,100vh,200px)]  w-fit object-contain"
             />
             <h1 className="big_head">
-              NOWHERE ISLE <br /> GAME STUDIO
+              NOWHERE ISLE <br /> STUDIO
             </h1>
           </div>
           {/* Text Area */}
           <div className="s2_lg_desc body_text space-y-10">
             <p className="max-w-4xl">
-              We are an independent game studio building atmospheric strategy
-              games with strong identity, intricate lore, meaningful tactical
-              systems, and underlying mystery.
+              Nowhere Isle Studio started in 2025 because we wanted a tactics
+              game with a real story in it, a dungeon to crawl, and a base to
+              manage between runs. We are based in Colombo, and we intend to be
+              the first game studio in Sri Lanka with a global release.
             </p>
             <div className="s2_lg_fct flex flex-col justify-center items-center gap-4 md:flex-row md:gap-10">
               <div className="flex gap-5">
@@ -247,10 +249,6 @@ export default function Home() {
               <div className="flex gap-5">
                 <p>Team Members</p>
                 <p className="text-green-600">6</p>
-              </div>
-              <div className="flex gap-5">
-                <p>Worlds Created</p>
-                <p className="text-green-600">1</p>
               </div>
               <div className="flex gap-5">
                 <p>Based In</p>
@@ -288,15 +286,11 @@ export default function Home() {
         <div className="w-[80%] m-auto flex flex-col gap-10 py-[clamp(50px,1vh,240px)]">
           <FadeInSection className="flex flex-col gap-4">
             <h1 className="head">Meet the souls you will lead into darkness</h1>
-            <p className="body_text md:w-xl">
-              A specialized trio of Inquisition operatives deployed into the
-              cursed ruins.
-            </p>
             <p className="body_text md:w-5xl">
-              United by faith and forged in conflict, these warriors of Maylon
-              combine holy support, unbreakable frontline assault, and precise
-              reconnaissance to purge corruption and complete their sacred
-              mission.
+              Every squad you send in is built from three classes. An Initiate
+              to stand in front. A Cadet to shoot over their shoulder. A Vicar
+              to keep the other two alive, and to bury them when they draw
+              their last breath.
             </p>
             <FadeInSection
               className="flex z-90 gap-2 items-center relative cursor-pointer hover:opacity-70 hover:font-black transition-all duration-500 py-2"
@@ -421,17 +415,19 @@ export default function Home() {
               FROM CONCEPT <br /> TO REALITY
             </h1>
             <p className="max-w-2xl body_text">
-              What does it take to be an NoWhere Isler? True Passion,
-              imagination, and the ability to thrive in a fast and exciting
-              studio
+              The art starts with the writing. A page of lore becomes a sketch,
+              the sketch becomes a model, and the model gets tested in the
+              engine until it feels like Old Maylon. The gallery is all of it,
+              including the ones we scrapped.
             </p>
+            <Link href="/isle_dashboard/artworks">
             <div
               className="flex z-90 gap-2 items-center relative cursor-pointer hover:opacity-70 hover:font-black transition-all duration-500 py-2"
               onClick={() => setIsActive(!isActive)}
               onMouseEnter={() => setIsActive(true)}
               onMouseLeave={() => setIsActive(false)}
             >
-              <p className="font-bold capitalize body_text">View Our ArtWork</p>
+              <p className="font-bold capitalize body_text">View Our Artwork</p>
               <div className="relative pb-0.5">
                 <div
                   className={`absolute h-0.5 transition-all duration-800 bg-linear-to-t from-transparent via-white to-transparent 
@@ -443,6 +439,7 @@ export default function Home() {
                 />
               </div>
             </div>
+            </Link>
           </FadeInSection>
           {/* Line Bottom */}
           <FadeInSection className="flex flex-col items-center z-10">
