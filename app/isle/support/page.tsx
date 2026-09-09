@@ -104,7 +104,7 @@ export default function SupportPage() {
 
       <div
         data-snap
-        className="w-[80%] m-auto flex flex-col gap-10 py-[clamp(50px,1vh,240px)]"
+        className="w-[80%] m-auto flex flex-col gap-10 py-[clamp(25px,1vh,120px)]"
       >
         <FadeInSection>
           <h1 className="text-center big_head">TELL US WHATS WRONG</h1>
@@ -112,7 +112,7 @@ export default function SupportPage() {
       </div>
 
       {/* Form */}
-      <FadeInSection data-snap className="max-w-5xl mx-auto px-6 md:py-20">
+      <FadeInSection data-snap className="max-w-5xl mx-auto px-2 md:py-2">
         {submitted ? (
           <div className="text-center py-16">
             <div className="text-6xl mb-6">🌫️</div>
@@ -148,7 +148,7 @@ export default function SupportPage() {
             </button>
           </div>
         ) : (
-          <div className="bg-black border border-zinc-800 rounded-3xl p-10 md:p-16">
+          <div className="bg-black border border-zinc-800 rounded-3xl p-1 md:p-4">
             {submitted ? (
               <div className="text-center py-16">
                 <div className="text-6xl mb-6">🌫️</div>
@@ -167,9 +167,9 @@ export default function SupportPage() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-12">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Report Type Selection */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   <button
                     type="button"
                     onClick={() => setReportType("studio")}
@@ -207,7 +207,7 @@ export default function SupportPage() {
                       <button
                         type="button"
                         onClick={() => setGameReportType("bug")}
-                        className={`flex-1 py-5 rounded-2xl border transition ${gameReportType === "bug" ? "border-red-800 bg-red-950/30" : "border-zinc-800 hover:border-zinc-700"}`}
+                        className={`flex-1 py-1 rounded-2xl border transition ${gameReportType === "bug" ? "border-red-800 bg-red-950/30" : "border-zinc-800 hover:border-zinc-700"}`}
                       >
                         Bug Report
                       </button>
@@ -222,13 +222,13 @@ export default function SupportPage() {
                   </div>
                 )}
 
-                {/* Contact Email (Optional) */}
+                {/* Contact Email (Compalsary) */}
                 {(reportType === "studio" ||
                   (reportType === "game" && gameReportType)) && (
                   <div className="space-y-8 pt-6 border-t border-zinc-800">
                     <div>
                       <label className="block text-gray-400 mb-3">
-                        Email (optional - so we can reply)
+                        Email (We will contact you here)
                       </label>
                       <input
                         type="email"

@@ -285,12 +285,12 @@ export default function Home() {
               </div>
             </div>
             <Link
-              href={"/isle_dashboard/expeditions"}
+              href={"/isle/about"}
               className="hero_title font-bold flex gap-2 items-center transition-all duration-500 border-2 rounded-sm hover:border-white/20 hover:text-white hover:bg-black/20 bg-white text-black py-2.5 px-5 w-fit m-auto"
             >
               <FaFantasyFlightGames size={26} />
               <div className="flex gap-2 items-center">
-                <p className="lora_body">View Game Page</p>
+                <p className="lora_body">View About Us</p>
                 <ImNewTab size={12} className="-translate-y-3 " />
               </div>
             </Link>
