@@ -22,7 +22,7 @@ function UnsubscribeContent() {
 
       if (!apiBase) {
         setStatus('error')
-        setMessage('Missing NEXT_PUBLIC_API_URL in frontend env.')
+        setMessage('Something went wrong on our side. Please try the link again later.')
         return
       }
 

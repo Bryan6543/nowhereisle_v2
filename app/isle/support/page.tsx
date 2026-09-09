@@ -107,7 +107,7 @@ export default function SupportPage() {
         className="w-[80%] m-auto flex flex-col gap-10 py-[clamp(50px,1vh,240px)]"
       >
         <FadeInSection>
-          <h1 className="text-center big_head">TELL US WHATS WRONG</h1>
+          <h1 className="text-center big_head">TELL US WHAT HAPPENED</h1>
         </FadeInSection>
       </div>
 
@@ -188,12 +188,8 @@ export default function SupportPage() {
                     onClick={() => setReportType("game")}
                     className={`p-8 rounded-2xl border text-left transition-all ${reportType === "game" ? "border-red-800 bg-red-950/20" : "border-zinc-800 hover:border-zinc-700"}`}
                   >
-                    <p className="font-medium text-lg">
-                      Sigil Tactics: Lost Maylon
-                    </p>
-                    <p className="text-sm text-gray-500 mt-2">
-                      Bugs, feedback, or suggestions
-                    </p>
+                  <p className="font-medium text-lg">Kradel Tactics</p>
+                  <p className="text-sm text-gray-500 mt-2">Bugs, feedback, or suggestions</p>
                   </button>
                 </div>
 
@@ -249,7 +245,7 @@ export default function SupportPage() {
                         onChange={(e) => setSubject(e.target.value)}
                         required
                         className="w-full bg-black border border-zinc-800 rounded-2xl px-6 py-4 focus:border-red-800 outline-none transition"
-                        placeholder="e.g. Game crashes during sigil activation"
+                      placeholder="e.g. Game crashes during dungeon crawl"
                       />
                     </div>
 
