@@ -69,8 +69,8 @@ export default function page() {
             </div>
             <h2 className="lora_head font-bold">SOCIALS</h2>
             <p className="lora_body">
-              Screenshots, short clips and the occasional sketch, posted when we
-              have one worth posting.
+              Screenshots, short clips and the occasional sketch on X and
+              Bluesky, posted when we have one worth posting.
             </p>
           </FadeInSection>
           {/* Youtube */}

@@ -45,7 +45,7 @@ export default function ExpeditionsPage() {
           <h1 className="massive_shead">KRADEL</h1>
           <h2 className="massive_bhead">TACTICS</h2>
           <p className="sub_head_sm text-zinc-300">
-            A brutal squad-based tactics RPG
+            A turn-based tactics RPG
           </p>
         </div>
       </section>
@@ -55,11 +55,11 @@ export default function ExpeditionsPage() {
         <FadeInSection className="space-y-4">
           <h2 className="dashboard_head">The Lost Holy Capital</h2>
           <p className="text-red-500 font-semibold">
-            A Brief Glimpse Into the Lore
+            What we can tell you
           </p>
           <p className="lora_body text-zinc-300 leading-relaxed max-w-2xl">
             The Golden Citadel was the ancient capital of Maylon when Maylon
-            was an empire. It has been dead for six thousand years. The blight
+            was an empire. It has been dead for seven thousand years. The blight
             that killed it has not stopped at the walls.
           </p>
           <p className="lora_body text-zinc-300 leading-relaxed max-w-2xl">
@@ -72,7 +72,7 @@ export default function ExpeditionsPage() {
 
         <FadeInSection className="bg-zinc-900/70 border border-zinc-800 rounded-3xl p-8 md:p-10">
           <p className="lora_body text-zinc-200 leading-relaxed text-xl">
-            Seven kings. Seven expeditions. Six thousand years. Nothing has
+            Seven kings. Seven expeditions. Seven thousand years. Nothing has
             ever come back.
           </p>
         </FadeInSection>
