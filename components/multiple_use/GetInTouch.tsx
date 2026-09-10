@@ -52,7 +52,7 @@ export default function GetInTouch() {
   };
 
   return (
-    <section>
+    <section id="newsletter">
       <div className="w-[80%] m-auto flex flex-col gap-10 py-[clamp(50px,1vh,240px)]">
         <div className="flex flex-col justify-center items-center gap-10">
           <FadeInSection className="flex flex-col justify-center items-center gap-5">
