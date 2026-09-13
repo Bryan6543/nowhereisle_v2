@@ -13,11 +13,15 @@ export default function page() {
   const t = usePageFields("about");
 
   useEffect(() => {
-    const id = setTimeout(() => {
+    const first = setTimeout(() => {
       enableSnap();
-    }, 100);
+    }, 200);
+    const second = setTimeout(() => {
+      enableSnap();
+    }, 1200);
     return () => {
-      clearTimeout(id);
+      clearTimeout(first);
+      clearTimeout(second);
       disableSnap();
     };
   }, [enableSnap, disableSnap]);
@@ -163,12 +167,12 @@ export default function page() {
         </FadeInSection>
       </section>
 
-      <div data-snap className="h-fit w-full">
+      <section data-snap className="h-fit w-full">
         <BehindTheFog />
-      </div>
-      <div data-snap className="h-fit w-full">
+      </section>
+      <section data-snap className="h-fit w-full">
         <GetInTouch />
-      </div>
+      </section>
     </main>
   );
 }

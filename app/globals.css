@@ -4,11 +4,11 @@
   /* border: 1px solid red; */
 }
 
-@media (min-width: 1024px) {
+/* @media (min-width: 1024px) {
   html {
     zoom: 0.98;
   }
-}
+} */
 
 .embla {
   overflow: hidden;

@@ -60,12 +60,16 @@ export default function Home() {
   ];
 
   useEffect(() => {
-    const id = setTimeout(() => {
+    const first = setTimeout(() => {
       enableSnap();
-    }, 150);
+    }, 200);
+    const second = setTimeout(() => {
+      enableSnap();
+    }, 1200);
 
     return () => {
-      clearTimeout(id);
+      clearTimeout(first);
+      clearTimeout(second);
       disableSnap();
     };
   }, [enableSnap, disableSnap]);
@@ -253,7 +257,7 @@ export default function Home() {
             width={613}
             height={500}
             alt="nowhere_isle_game_studio_logo"
-            className="h-1/3 object-contain m-auto"
+            className="h-1/3 w-auto object-contain m-auto"
           />
         </div>
         <div className="w-[80%] m-auto flex flex-col items-center gap-10 py-[clamp(50px,1vh,240px)] text-center">
@@ -263,7 +267,7 @@ export default function Home() {
               width={613}
               height={500}
               alt="nowhere_isle_game_studio_logo"
-              className="h-[clamp(120px,100vh,200px)]  w-fit object-contain"
+              className="h-[clamp(120px,100vh,200px)] w-auto object-contain"
             />
             <h1 className="big_head">{t("intro_title", "NOWHERE ISLE STUDIO")}</h1>
           </div>

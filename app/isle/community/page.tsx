@@ -11,11 +11,15 @@ export default function page() {
   const t = usePageFields("community");
 
   useEffect(() => {
-    const id = setTimeout(() => {
+    const first = setTimeout(() => {
       enableSnap();
-    }, 100);
+    }, 200);
+    const second = setTimeout(() => {
+      enableSnap();
+    }, 1200);
     return () => {
-      clearTimeout(id);
+      clearTimeout(first);
+      clearTimeout(second);
       disableSnap();
     };
   }, [enableSnap, disableSnap]);

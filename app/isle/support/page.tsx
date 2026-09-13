@@ -16,7 +16,7 @@ export default function SupportPage() {
   const [gameReportType, setGameReportType] = useState<GameReportType>("");
   const [subject, setSubject] = useState("");
   const [description, setDescription] = useState("");
-  const [email, setEmail] = useState(""); // ← New: Contact email
+  const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [ticketNumber, setTicketNumber] = useState<string | null>(null);
@@ -25,13 +25,16 @@ export default function SupportPage() {
   const t = usePageFields("support");
 
   useEffect(() => {
-    // wait a tick so all sections exist in the DOM
-    const id = setTimeout(() => {
+    const first = setTimeout(() => {
       enableSnap();
-    }, 100);
+    }, 200);
+    const second = setTimeout(() => {
+      enableSnap();
+    }, 1200);
 
     return () => {
-      clearTimeout(id);
+      clearTimeout(first);
+      clearTimeout(second);
       disableSnap();
     };
   }, [enableSnap, disableSnap]);
@@ -80,9 +83,9 @@ export default function SupportPage() {
       setIsSubmitting(false);
     }
   };
+
   return (
     <main>
-      {/* Hero */}
       <section
         data-snap
         className="relative w-full h-[40vh] md:h-[60vh] overflow-hidden"
@@ -106,75 +109,56 @@ export default function SupportPage() {
         </FadeInSection>
       </section>
 
-      <div
+      <section
         data-snap
         className="w-[80%] m-auto flex flex-col gap-10 py-[clamp(25px,1vh,120px)]"
       >
         <FadeInSection>
           <h1 className="text-center big_head">
             {t("form_title", "TELL US WHAT HAPPENED")}
-          </h1>{" "}
+          </h1>
         </FadeInSection>
-      </div>
+      </section>
 
-      {/* Form */}
-      <FadeInSection data-snap className="max-w-5xl mx-auto px-2 md:py-2">
-        {submitted ? (
-          <div className="text-center py-16">
-            <div className="text-6xl mb-6">🌫️</div>
-            <h3 className="text-3xl font-semibold text-red-400 mb-4">
-              Message Received
-            </h3>
-            <p className="text-gray-400 max-w-md mx-auto mb-4">
-              Thank you. Your support ticket has been created.
-            </p>
-            {ticketNumber && (
-              <p className="text-white text-lg mb-2">
-                Ticket number:{" "}
-                <span className="font-semibold">{ticketNumber}</span>
+      <section data-snap className="max-w-5xl mx-auto px-2 md:py-2">
+        <FadeInSection>
+          {submitted ? (
+            <div className="text-center py-16">
+              <div className="text-6xl mb-6">🌫️</div>
+              <h3 className="text-3xl font-semibold text-red-400 mb-4">
+                Message Received
+              </h3>
+              <p className="text-gray-400 max-w-md mx-auto mb-4">
+                Thank you. Your support ticket has been created.
               </p>
-            )}
-            {ticketUrl && (
-              <p className="text-gray-400 mb-6">
-                Track updates:{" "}
-                <a href={ticketUrl} className="text-red-400 underline">
-                  open your ticket
-                </a>
-              </p>
-            )}
-            <button
-              onClick={() => {
-                setSubmitted(false);
-                setTicketNumber(null);
-                setTicketUrl(null);
-              }}
-              className="mt-4 px-10 py-4 border border-red-700 hover:bg-red-950 rounded-2xl transition"
-            >
-              Send Another Message
-            </button>
-          </div>
-        ) : (
-          <div className="bg-black border border-zinc-800 rounded-3xl p-1 md:p-4">
-            {submitted ? (
-              <div className="text-center py-16">
-                <div className="text-6xl mb-6">🌫️</div>
-                <h3 className="text-3xl font-semibold text-red-400 mb-4">
-                  Message Received
-                </h3>
-                <p className="text-gray-400 max-w-md mx-auto">
-                  Thank you. We’ve received your message and will reply as soon
-                  as possible.
+              {ticketNumber && (
+                <p className="text-white text-lg mb-2">
+                  Ticket number:{" "}
+                  <span className="font-semibold">{ticketNumber}</span>
                 </p>
-                <button
-                  onClick={() => setSubmitted(false)}
-                  className="mt-10 px-10 py-4 border border-red-700 hover:bg-red-950 rounded-2xl transition"
-                >
-                  Send Another Message
-                </button>
-              </div>
-            ) : (
+              )}
+              {ticketUrl && (
+                <p className="text-gray-400 mb-6">
+                  Track updates:{" "}
+                  <a href={ticketUrl} className="text-red-400 underline">
+                    open your ticket
+                  </a>
+                </p>
+              )}
+              <button
+                onClick={() => {
+                  setSubmitted(false);
+                  setTicketNumber(null);
+                  setTicketUrl(null);
+                }}
+                className="mt-4 px-10 py-4 border border-red-700 hover:bg-red-950 rounded-2xl transition"
+              >
+                Send Another Message
+              </button>
+            </div>
+          ) : (
+            <div className="bg-black border border-zinc-800 rounded-3xl p-1 md:p-4">
               <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Report Type Selection */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   <button
                     type="button"
@@ -201,7 +185,6 @@ export default function SupportPage() {
                   </button>
                 </div>
 
-                {/* Game Sub-type */}
                 {reportType === "game" && (
                   <div>
                     <label className="block text-gray-400 mb-4 text-sm uppercase tracking-widest">
@@ -226,7 +209,6 @@ export default function SupportPage() {
                   </div>
                 )}
 
-                {/* Contact Email (Compalsary) */}
                 {(reportType === "studio" ||
                   (reportType === "game" && gameReportType)) && (
                   <div className="space-y-8 pt-6 border-t border-zinc-800">
@@ -244,9 +226,7 @@ export default function SupportPage() {
                     </div>
 
                     <div>
-                      <label className="block text-gray-400 mb-3">
-                        Subject
-                      </label>
+                      <label className="block text-gray-400 mb-3">Subject</label>
                       <input
                         type="text"
                         value={subject}
@@ -281,16 +261,17 @@ export default function SupportPage() {
                   </div>
                 )}
               </form>
-            )}
-          </div>
-        )}
-      </FadeInSection>
-      <div data-snap className="md:pt-30">
+            </div>
+          )}
+        </FadeInSection>
+      </section>
+
+      <section data-snap className="md:pt-30">
         <GetInTouch />
-      </div>
-      <div data-snap className="md:pt-30">
-        <FAQ />{" "}
-      </div>
+      </section>
+      <section data-snap className="md:pt-30">
+        <FAQ />
+      </section>
     </main>
   );
 }

@@ -123,7 +123,7 @@ export default function RootLayout({
         <Preloader />
 
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          <div className="min-h-screen w-full bg-[--color-background] relative overflow-hidden">
+          <div className="min-h-screen w-full bg-[--color-background] relative overflow-x-hidden">
             {/* Rose Spotlight Background */}
             <div
               className="fixed inset-0 z-0 pointer-events-none"
