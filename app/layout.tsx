@@ -42,10 +42,10 @@ const keaniaOne = Keania_One({
 const lilex = Lilex({
   variable: "--font-lilex",
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700"],
-  // Check and remove the weights not used
+  weight: ["400", "500", "600", "700"],
   display: "swap",
   preload: true,
+  adjustFontFallback: false,
 });
 
 const lilitaOne = Lilita_One({
@@ -116,12 +116,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${maidenOrange.variable} ${inconsolata.variable} ${keaniaOne.variable} ${lilex.variable} ${lilitaOne.variable} ${lora.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-black">
         <Preloader />
 
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <div className="min-h-screen w-full bg-[--color-background] relative overflow-hidden">
             {/* Rose Spotlight Background */}
             <div

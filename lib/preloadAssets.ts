@@ -1,21 +1,16 @@
 export const criticalAssets = {
-  images: [""],
-  videos: ["/"],
-  fonts: [""],
+  images: ["/logo.png", "/logo2.png"],
+  videos: [] as string[],
+  fonts: [] as string[],
 } as const;
 
 export const preloadAllAssets = async (): Promise<void> => {
-  const { images } = criticalAssets;
-
-  const imagePromises = images.map((src) => {
+  const imagePromises = criticalAssets.images.map((src) => {
     return new Promise<void>((resolve) => {
-      const img = new Image();
+      const img = new window.Image();
       img.src = src;
       img.onload = () => resolve();
-      img.onerror = () => {
-        console.warn(`Failed to preload: ${src}`);
-        resolve();
-      };
+      img.onerror = () => resolve();
     });
   });
 

@@ -6,6 +6,7 @@ import FadeInSection from "../../../hooks/FadeInSection";
 import FAQ from "../../../components/multiple_use/FAQ";
 import GetInTouch from "../../../components/multiple_use/GetInTouch";
 import { useLenis } from "../../../hooks/SmoothScrollProvider";
+import { usePageFields } from "../../../hooks/usePageFields";
 
 type ReportType = "studio" | "game" | "";
 type GameReportType = "bug" | "feedback" | "";
@@ -21,6 +22,7 @@ export default function SupportPage() {
   const [ticketNumber, setTicketNumber] = useState<string | null>(null);
   const [ticketUrl, setTicketUrl] = useState<string | null>(null);
   const { enableSnap, disableSnap } = useLenis();
+  const t = usePageFields("support");
 
   useEffect(() => {
     // wait a tick so all sections exist in the DOM
@@ -86,7 +88,7 @@ export default function SupportPage() {
         className="relative w-full h-[40vh] md:h-[60vh] overflow-hidden"
       >
         <Image
-          src="/img-4.png"
+          src={t("hero_image", "/img-4.png")}
           width={5120}
           height={2880}
           alt=""
@@ -94,10 +96,12 @@ export default function SupportPage() {
           priority
         />
         <FadeInSection className="absolute w-full h-full flex flex-col justify-center items-center gap-4 z-20 bg-black/40 text-center">
-          <h2 className="body_text text-red-800 font-bold">WE ARE LISTENING</h2>
-          <h1 className="big_head">SUPPORT</h1>
+          <h2 className="body_text text-red-800 font-bold">
+            {t("hero_kicker", "WE ARE LISTENING")}
+          </h2>
+          <h1 className="big_head">{t("hero_title", "SUPPORT")}</h1>
           <p className="body_text">
-            Every message helps us make the isle better.
+            {t("hero_text", "Every message helps us make the isle better.")}
           </p>
         </FadeInSection>
       </section>
@@ -107,7 +111,9 @@ export default function SupportPage() {
         className="w-[80%] m-auto flex flex-col gap-10 py-[clamp(25px,1vh,120px)]"
       >
         <FadeInSection>
-          <h1 className="text-center big_head">TELL US WHAT HAPPENED</h1>
+          <h1 className="text-center big_head">
+            {t("form_title", "TELL US WHAT HAPPENED")}
+          </h1>{" "}
         </FadeInSection>
       </div>
 
@@ -188,8 +194,10 @@ export default function SupportPage() {
                     onClick={() => setReportType("game")}
                     className={`p-8 rounded-2xl border text-left transition-all ${reportType === "game" ? "border-red-800 bg-red-950/20" : "border-zinc-800 hover:border-zinc-700"}`}
                   >
-                  <p className="font-medium text-lg">Kradel Tactics</p>
-                  <p className="text-sm text-gray-500 mt-2">Bugs, feedback, or suggestions</p>
+                    <p className="font-medium text-lg">Kradel Tactics</p>
+                    <p className="text-sm text-gray-500 mt-2">
+                      Bugs, feedback, or suggestions
+                    </p>
                   </button>
                 </div>
 
@@ -245,7 +253,7 @@ export default function SupportPage() {
                         onChange={(e) => setSubject(e.target.value)}
                         required
                         className="w-full bg-black border border-zinc-800 rounded-2xl px-6 py-4 focus:border-red-800 outline-none transition"
-                      placeholder="e.g. Game crashes during dungeon crawl"
+                        placeholder="e.g. Game crashes during dungeon crawl"
                       />
                     </div>
 

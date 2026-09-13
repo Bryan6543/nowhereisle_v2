@@ -3,8 +3,9 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import FadeInSection from "@/hooks/FadeInSection";
+import ShareBlogButton from "@/components/ShareBlogButton";
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 export default async function BlogPost({
   params,
@@ -36,6 +37,7 @@ export default async function BlogPost({
             <Image
               src={blog.thumbnail_url}
               alt={blog.title}
+              sizes="(max-width: 768px) 100vw, 900px"
               fill
               className="object-cover"
               priority
@@ -51,7 +53,9 @@ export default async function BlogPost({
             year: "numeric",
           })}
         </p>
-
+        <div className="mb-10">
+          <ShareBlogButton blogId={blog.id} title={blog.title} />
+        </div>
         <div
           className="prose prose-invert prose-lg max-w-none prose-headings:font-semibold prose-a:text-red-400"
           dangerouslySetInnerHTML={{ __html: blog.content }}

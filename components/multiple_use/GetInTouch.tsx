@@ -2,11 +2,15 @@
 
 import { useState } from "react";
 import FadeInSection from "../../hooks/FadeInSection";
+import { usePageFields } from "../../hooks/usePageFields";
 
 export default function GetInTouch() {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
   const [message, setMessage] = useState("");
+  const t = usePageFields("get_in_touch");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,7 +42,9 @@ export default function GetInTouch() {
       const data = await res.json();
 
       if (!res.ok || !data.success) {
-        throw new Error(data.error || "Something went wrong. Please try again.");
+        throw new Error(
+          data.error || "Something went wrong. Please try again.",
+        );
       }
 
       setStatus("success");
@@ -56,12 +62,14 @@ export default function GetInTouch() {
       <div className="w-[80%] m-auto flex flex-col gap-10 py-[clamp(50px,1vh,240px)]">
         <div className="flex flex-col justify-center items-center gap-10">
           <FadeInSection className="flex flex-col justify-center items-center gap-5">
-            <h1 className="head text-center">STEP INTO THE MIST</h1>
+            <h1 className="head text-center">
+              {t("title", "STEP INTO THE MIST")}
+            </h1>
             <p className="body_text md:w-xl text-center">
-              We send a mail when there is something worth sending. A playable
-              build, the Steam page going live, a piece of lore we finished. A
-              few a year, not a few a week, so don't worry about getting
-              spammed.
+              {t(
+                "text",
+                "We send a mail when there is something worth sending. A playable build, the Steam page going live, a piece of lore we finished. A few a year, not a few a week, so don't worry about getting spammed.",
+              )}
             </p>
           </FadeInSection>
 
