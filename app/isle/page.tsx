@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import FadeInSection from "../../hooks/FadeInSection";
 import FAQ from "../../components/multiple_use/FAQ";
 
@@ -14,40 +14,68 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import { homeHeroSlides } from "../../data/SlidesData";
-import { soulsCharactersSlides } from "../../data/SlidesData";
-import { worldBuildingSlides } from "../../data/SlidesData";
-import { artisticObsessionSlides } from "../../data/SlidesData";
-import { playerExperienceSlides } from "../../data/SlidesData";
 import GetInTouch from "../../components/multiple_use/GetInTouch";
 import BehindTheFog from "../../components/multiple_use/BehindTheFog";
 import WorldMaking from "../../components/multiple_use/WorldMaking";
 import { FaFantasyFlightGames } from "react-icons/fa";
 import { ImNewTab } from "react-icons/im";
-
 import { useLenis } from "../../hooks/SmoothScrollProvider";
+import { usePageFields } from "../../hooks/usePageFields";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
-  const [isActive, setIsActive] = useState(false);
   const conceptRealitySection = useRef<HTMLDivElement>(null);
   const { enableSnap, disableSnap } = useLenis();
+  const t = usePageFields("home");
+
+  const heroSlides = [
+    { id: 1, image: t("hero_image_1", "/img-2.png"), title: "hero 1" },
+    { id: 2, image: t("hero_image_2", "/img-3.png"), title: "hero 2" },
+    { id: 3, image: t("hero_image_3", "/img-4.png"), title: "hero 3" },
+  ];
+
+  const soulsCharactersSlides = [
+    {
+      id: 1,
+      image: t("char_1_image", "/chars/vicar_mixamo.png"),
+      title: t("char_1_name", "Vicar"),
+      height: 828,
+      width: 555,
+    },
+    {
+      id: 2,
+      image: t("char_2_image", "/chars/cadet_mixamo.png"),
+      title: t("char_2_name", "Cadet"),
+      height: 608,
+      width: 768,
+    },
+    {
+      id: 3,
+      image: t("char_3_image", "/chars/initiate_mixamo.png"),
+      title: t("char_3_name", "Initiate"),
+      height: 748,
+      width: 515,
+    },
+  ];
 
   useEffect(() => {
-  const id = setTimeout(() => {
-    enableSnap();          // now finds only the clean top-level data-snap sections
-  }, 150);
+    const first = setTimeout(() => {
+      enableSnap();
+    }, 200);
+    const second = setTimeout(() => {
+      enableSnap();
+    }, 1200);
 
-  return () => {
-    clearTimeout(id);
-    disableSnap();
-  };
-}, [enableSnap, disableSnap]);
+    return () => {
+      clearTimeout(first);
+      clearTimeout(second);
+      disableSnap();
+    };
+  }, [enableSnap, disableSnap]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Starter Animations
       const startAnimations = () => {
         gsap
           .timeline()
@@ -70,20 +98,14 @@ export default function Home() {
       };
 
       const handleStart = () => startAnimations();
-
       document.addEventListener("preloaderComplete", handleStart);
-
-      // Always run on mount as fallback
       requestAnimationFrame(() => {
         startAnimations();
       });
-
-      // Run immediately if already loaded before
       if (sessionStorage.getItem("preloaderFinished")) {
         startAnimations();
       }
 
-      // SECTION 02 - Nowhere isle Introduction
       gsap
         .timeline({
           scrollTrigger: {
@@ -112,7 +134,7 @@ export default function Home() {
           { scale: 1, opacity: 1, ease: "back.inOut", duration: 0.5 },
         )
         .fromTo(
-          ".s2_lg_dsc",
+          ".s2_lg_desc",
           { y: 50, opacity: 0 },
           { y: 0, opacity: 1, ease: "power4.in", duration: 0.5 },
         )
@@ -127,7 +149,6 @@ export default function Home() {
           { y: 0, opacity: 1, ease: "power4.in", duration: 0.5 },
         );
 
-      // SECTION 05 - From Concept to Reality
       if (conceptRealitySection.current) {
         gsap.fromTo(
           ".left-side-image",
@@ -171,12 +192,10 @@ export default function Home() {
 
   return (
     <main>
-      {/* Section 1 - Hero */}
       <section
         data-snap
         className="h-fit  relative w-full flex-col gap-5 overflow-hidden"
       >
-        {/* Hero Carousel with Swiper */}
         <Swiper
           modules={[Autoplay]}
           spaceBetween={0}
@@ -188,12 +207,10 @@ export default function Home() {
           }}
           className="relative scale-animation-hero"
         >
-          {homeHeroSlides.map((slide) => (
+          {heroSlides.map((slide) => (
             <SwiperSlide key={slide.id}>
               <div className="h-screen rounded-2xl overflow-hidden relative">
                 <div className="absolute inset-0 w-full h-full bg-black">
-                  {/* Overlay black */}
-                  {/* <div className="w-full bg-black/40 h-full absolute z-20" /> */}
                   <Image
                     src={slide.image}
                     alt={slide.title}
@@ -207,15 +224,15 @@ export default function Home() {
           ))}
         </Swiper>
 
-        {/* Text Overlay - Same position as before */}
         <div className="absolute bottom-20 left-4 right-4 md:space-y-2 md:left-20 md:right-20 z-30 border-white/10 border-2 shadow-sm bg-black/30 backdrop-blur-xs p-4 md:p-10 rounded-xl flex flex-col items-start gap-2">
           <h1 className="head hero_title opacity-0 translate-y-20 ">
-            Kradel Tactics
+            {t("hero_title", "Kradel Tactics")}
           </h1>
           <p className="body_text hero_subtitle max-w-5xl opacity-0 translate-y-20">
-            Lead the seventh expedition into the heart of Old Maylon as its
-            Grand Inquisitor. Wounds do not heal on their own, corruption
-            spreads, and resolve runs out. A turn-based tactics RPG.
+            {t(
+              "hero_text",
+              "Lead the seventh expedition into the heart of Old Maylon as its Grand Inquisitor. Wounds do not heal on their own, corruption spreads, and resolve runs out. A turn-based tactics RPG.",
+            )}
           </p>
           <Link
             href={"/isle_dashboard/expeditions"}
@@ -223,91 +240,87 @@ export default function Home() {
           >
             <FaFantasyFlightGames size={26} />
             <div className="flex gap-2 items-center">
-              <p className="lora_body">OPEN GAME PAGE</p>
+              <p className="lora_body">{t("hero_button", "OPEN GAME PAGE")}</p>
               <ImNewTab size={12} className="-translate-y-3 " />
             </div>
           </Link>
         </div>
       </section>
-      {/* Section 2 - Nowhere Isle Introduction */}
+
       <section
         data-snap
         className="relative h-auto lg:h-[80vh] overflow-hidden flex"
       >
-        {/* Overlay */}
         <div className="s2_SliderContainer overlay-logo bg-black w-full h-full flex justify-center items-center z-10 absolute">
           <Image
             src={"/logo.png"}
             width={613}
             height={500}
             alt="nowhere_isle_game_studio_logo"
-            className="h-1/3 object-contain m-auto"
+            className="h-1/3 w-auto object-contain m-auto"
           />
         </div>
-        {/* Layer ground */}
         <div className="w-[80%] m-auto flex flex-col items-center gap-10 py-[clamp(50px,1vh,240px)] text-center">
-          {/* LOGO/Name */}
           <div className="s2_lg_logo flex gap-10 flex-col items-center md:flex-row">
             <Image
               src={"/logo.png"}
               width={613}
               height={500}
               alt="nowhere_isle_game_studio_logo"
-              className="h-[clamp(120px,100vh,200px)]  w-fit object-contain"
+              className="h-[clamp(120px,100vh,200px)] w-auto object-contain"
             />
-            <h1 className="big_head">
-              NOWHERE ISLE <br /> STUDIO
-            </h1>
+            <h1 className="big_head">{t("intro_title", "NOWHERE ISLE STUDIO")}</h1>
           </div>
-          {/* Text Area */}
           <div className="s2_lg_desc body_text space-y-10">
             <p className="max-w-4xl">
-              Nowhere Isle Studio started in 2025 because we wanted a tactics
-              game with a real story in it, a dungeon to crawl, and a base to
-              manage between runs. We are based in Colombo, and we intend to be
-              the first game studio in Sri Lanka with a global release.
+              {t(
+                "intro_text",
+                "Nowhere Isle Studio started in 2025 because we wanted a tactics game with a real story in it, a dungeon to crawl, and a base to manage between runs. We are based in Colombo, and we intend to be the first game studio in Sri Lanka with a global release.",
+              )}
             </p>
             <div className="s2_lg_fct flex flex-col justify-center items-center gap-4 md:flex-row md:gap-10">
               <div className="flex gap-5">
                 <p>Established</p>
-                <p className="text-green-600">2025</p>
+                <p className="text-green-600">{t("stat_year", "2025")}</p>
               </div>
               <div className="flex gap-5">
                 <p>Team Members</p>
-                <p className="text-green-600">6</p>
+                <p className="text-green-600">{t("stat_team", "6")}</p>
               </div>
               <div className="flex gap-5">
                 <p>Based In</p>
-                <p className="text-green-600">Sri Lanka</p>
+                <p className="text-green-600">{t("stat_place", "Sri Lanka")}</p>
               </div>
             </div>
             <Link
-              href={"/isle_dashboard/expeditions"}
-              className="hero_title font-bold flex gap-2 items-center transition-all duration-500 border-2 rounded-sm hover:border-white/20 hover:text-white hover:bg-black/20 bg-white text-black py-2.5 px-5 w-fit m-auto"
+              href={"/isle/about"}
+              className="s2_lg_link hero_title font-bold flex gap-2 items-center transition-all duration-500 border-2 rounded-sm hover:border-white/20 hover:text-white hover:bg-black/20 bg-white text-black py-2.5 px-5 w-fit m-auto"
             >
               <FaFantasyFlightGames size={26} />
               <div className="flex gap-2 items-center">
-                <p className="lora_body">View Game Page</p>
+                <p className="lora_body">View About Us</p>
                 <ImNewTab size={12} className="-translate-y-3 " />
               </div>
             </Link>
           </div>
         </div>
       </section>
-      {/* Section 3 - A World in the Making */}
+
       <section data-snap className="h-fit relative w-full">
         <WorldMaking />
       </section>
-      {/* Section 4 - Meet Souls you will lead into darkness */}
+
       <section data-snap>
         <div className="w-[80%] h-fit m-auto flex flex-col gap-10 py-[clamp(50px,1vh,240px)]">
           <FadeInSection className="flex flex-col gap-4">
-            <h1 className="head">Meet the souls you will lead into darkness</h1>
+            <h1 className="head">
+              {t("souls_title", "Meet the souls you will lead into darkness")}
+            </h1>
             <p className="body_text md:w-5xl">
-              Every squad you send in is built from three classes. An Initiate
-              to stand in front. A Cadet to shoot over their shoulder. A Vicar
-              to keep the other two alive, and to bury them when they draw
-              their last breath.
+              {t(
+                "souls_text",
+                "Every squad you send in is built from three classes. An Initiate to stand in front. A Cadet to shoot over their shoulder. A Vicar to keep the other two alive, and to bury them when they draw their last breath.",
+              )}
             </p>
             <Link
               href={"/isle_dashboard/expeditions"}
@@ -325,10 +338,10 @@ export default function Home() {
               modules={[Autoplay]}
               spaceBetween={20}
               slidesPerView={1}
-              loop={true}
+              loop={false}
               autoplay={{ delay: 3000, disableOnInteraction: false }}
               breakpoints={{
-                768: { slidesPerView: 3, spaceBetween: 30 }, // 3 slides on tablet+
+                768: { slidesPerView: 3, spaceBetween: 30 },
               }}
               className="my-8"
             >
@@ -336,7 +349,6 @@ export default function Home() {
                 <SwiperSlide key={slide.id}>
                   <div className="h-125 w-full rounded-2xl overflow-hidden relative">
                     <div className="absolute inset-0 bg-black/10 hover:bg-black/20 hover:border hover:shadow-2xl transition-all duration-300">
-                      {/* <div className="w-full bg-black/40 h-full absolute z-20" /> */}
                       <Image
                         src={slide.image}
                         alt={slide.title}
@@ -353,14 +365,12 @@ export default function Home() {
           </FadeInSection>
         </div>
       </section>
-      {/* Section 5 - From Concept to Reality */}
+
       <section
         data-snap
         ref={conceptRealitySection}
-        className={`
-              h-screen  overflow-hidden w-full relative py-20 `}
+        className="h-screen  overflow-hidden w-full relative py-20"
       >
-        {/* Left side Sliders */}
         <div className="absolute left-0 z-30 flex flex-col items-end gap-2 h-full w-1/2 p-2 *:transition-all *:duration-500">
           <Image
             src={"/artworks_sdt02.png"}
@@ -384,7 +394,6 @@ export default function Home() {
             className="left-side-image w-96 h-67 shadow-2xl"
           />
         </div>
-        {/* Right Side Slider */}
         <div className="absolute right-0 z-30 flex flex-col items-start gap-2 h-full w-1/2 p-2 *:transition-all *:duration-500">
           <Image
             src={"/corrupt_wolf.png"}
@@ -409,23 +418,20 @@ export default function Home() {
           />
         </div>
 
-        {/* Chidren Container */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 w-[80%] m-auto flex flex-col justify-center items-center h-full text-center gap-10">
-          {/* Line top */}
           <FadeInSection className="flex flex-col items-center z-10">
             <div className="w-10 h-0.5 bg-linear-to-t from-transparent via-white to-transparent" />
             <div className="w-0.5 h-25 bg-linear-to-r from-transparent via-white to-transparent" />
           </FadeInSection>
-          {/* Text Area */}
           <FadeInSection className="flex justify-center items-center flex-col gap-5">
             <h1 className="head font-bold leading-24 ">
-              FROM CONCEPT <br /> TO REALITY
+              {t("concept_title", "FROM CONCEPT TO REALITY")}
             </h1>
             <p className="max-w-2xl body_text">
-              The art starts with the writing. A page of lore becomes a sketch,
-              the sketch becomes a model, and the model gets tested in the
-              engine until it feels like Old Maylon. The gallery is all of it,
-              including the ones we scrapped.
+              {t(
+                "concept_text",
+                "The art starts with the writing. A page of lore becomes a sketch, the sketch becomes a model, and the model gets tested in the engine until it feels like Old Maylon. The gallery is all of it, including the ones we scrapped.",
+              )}
             </p>
             <Link
               href={"/isle_dashboard/artworks"}
@@ -438,7 +444,6 @@ export default function Home() {
               </div>
             </Link>
           </FadeInSection>
-          {/* Line Bottom */}
           <FadeInSection className="flex flex-col items-center z-10">
             <div className="w-0.5 h-25 bg-linear-to-r from-transparent via-white to-transparent" />
             <div className="w-15 h-0.5 bg-linear-to-t from-transparent via-white to-transparent" />
@@ -446,21 +451,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section 6 - Behind the Fog */}\
       <section data-snap className="h-fit relative w-full">
         <BehindTheFog />
       </section>
-      
-      {/* Section 7 - Step in to the Mist (Email Subs) */}
       <section data-snap className="h-fit relative w-full">
-        <GetInTouch data-snap />
+        <GetInTouch />
       </section>
-      
-      {/* Section 8 - FAQ */}
       <section data-snap className="h-fit relative w-full">
-        <FAQ data-snap />
+        <FAQ />
       </section>
-    
     </main>
   );
 }

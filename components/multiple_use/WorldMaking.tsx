@@ -1,47 +1,40 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState, useRef } from "react";
 import FadeInSection from "../../hooks/FadeInSection";
 import Link from "next/link";
 import { FaFantasyFlightGames } from "react-icons/fa";
 import { ImNewTab } from "react-icons/im";
+import { usePageFields } from "../../hooks/usePageFields";
 
 export default function WorldMaking() {
-  const [isActive, setIsActive] = useState(false);
+  const t = usePageFields("world_making");
+
   return (
-    <section >
+    <section>
       <div className="w-[80%] m-auto flex flex-col gap-10 py-[clamp(50px,1vh,240px)]">
         <FadeInSection className="flex flex-col gap-2.5">
-          <h1 className="head">A World In The Making</h1>
+          <h1 className="head">{t("title", "A World In The Making")}</h1>
           <p className="body_text md:w-4xl">
-            You run the base and the people in it. Each expedition you pick a
-            squad, lead them into the ruins of Old Maylon, and come back with
-            what you can. Wounds, corruption and shaken resolve come home with
-            them, so who you send next time is never a simple choice. Reach the
-            heart of the city and claim the lost capital of Maylon or die
-            trying.
+            {t(
+              "text",
+              "You run the base and the people in it. Each expedition you pick a squad, lead them into the ruins of Old Maylon, and come back with what you can. Wounds, corruption and shaken resolve come home with them, so who you send next time is never a simple choice. Reach the heart of the city and claim the lost capital of Maylon or die trying.",
+            )}
           </p>
         </FadeInSection>
         <div className="md:relative md:block grid grid-cols-1 grid-rows-2 gap-2.5 md:gap-0">
-          <FadeInSection
-            direction="left"
-            className="md:col-start-1 md:row-start-1"
-          >
+          <FadeInSection direction="left" className="md:col-start-1 md:row-start-1">
             <Image
-              src={"/img-3.png"}
+              src={t("image_1", "/img-3.png")}
               width={1000}
               height={1000}
               alt=""
               className="w-[clamp(250px,100vw,850px)] shadow-2xl rounded-2xl"
             />
           </FadeInSection>
-          <FadeInSection
-            direction="right"
-            className="md:col-start-2 md:row-start-2 2xl:pb-50"
-          >
+          <FadeInSection direction="right" className="md:col-start-2 md:row-start-2 2xl:pb-50">
             <Image
-              src={"/img-2.png"}
+              src={t("image_2", "/img-2.png")}
               width={1000}
               height={1000}
               alt=""
@@ -51,28 +44,13 @@ export default function WorldMaking() {
         </div>
         <div className="flex flex-col gap-8">
           <FadeInSection direction="left">
-            <h1 className="massive_shead">KRADEL</h1>
-            <h1 className="massive_bhead">TACTICS</h1>
+            <h1 className="massive_shead">{t("big_1", "KRADEL")}</h1>
+            <h1 className="massive_bhead">{t("big_2", "TACTICS")}</h1>
           </FadeInSection>
           <FadeInSection className="flex gap-8 opacity-75">
-            <Image
-              title="We are currently working on getting our game on these platforms. Stay tuned for updates!"
-              src={"/icons/kick.png"}
-              alt="Kick"
-              width={71}
-              height={79}
-              className="w-[clamp(56px,100vw,71px)] opacity-40 cursor-not-allowed"
-            />
-            <Image
-              title="We are currently working on getting our game on these platforms. Stay tuned for updates!"
-              src={"/icons/steam.png"}
-              alt="steam"
-              width={85}
-              height={85}
-              className="w-[clamp(56px,100vw,71px)] opacity-40 cursor-not-allowed"
-            />
+            <Image title="Coming soon" src={"/icons/kick.png"} alt="Kick" width={71} height={79} className="w-[clamp(56px,100vw,71px)] opacity-40 cursor-not-allowed" />
+            <Image title="Coming soon" src={"/icons/steam.png"} alt="steam" width={85} height={85} className="w-[clamp(56px,100vw,71px)] opacity-40 cursor-not-allowed" />
           </FadeInSection>
-
           <Link
             href={"/isle_dashboard/expeditions"}
             className="hero_title font-bold flex gap-2 items-center transition-all duration-500 border-2 rounded-sm hover:border-white/20 hover:text-white hover:bg-black/20 bg-white text-black py-2.5 px-5 w-fit"

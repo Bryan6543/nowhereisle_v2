@@ -43,30 +43,31 @@ export default function SmoothScrollProvider({
 }) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
   const [snap, setSnap] = useState<Snap | null>(null);
-
   const unsubscribersRef = useRef<Array<() => void>>([]);
 
   useEffect(() => {
     const instance = new Lenis({
-      duration: 1.2,
-      lerp: 0.08,
+      duration: 1.05,
+      lerp: 0.1,
       smoothWheel: true,
+      wheelMultiplier: 1,
       syncTouch: false,
+      allowNestedScroll: true,
     });
 
     instance.on("scroll", ScrollTrigger.update);
 
-    gsap.ticker.add((time) => {
+    const tick = (time: number) => {
       instance.raf(time * 1000);
-    });
+    };
+    gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
 
     const snapInstance = new Snap(instance, {
-      type: "proximity", // only snaps when close enough
-      distanceThreshold: "28%", // must be quite close before it pulls you in
-      debounce: 280, // waits until you stop scrolling before snapping
-      duration: 0.9, // slightly shorter, feels lighter
-      // lerp: 0.12,              // optional – higher = snappier settle
+      type: "proximity",
+      distanceThreshold: "18%",
+      debounce: 420,
+      duration: 0.7,
     });
 
     setLenis(instance);
@@ -77,7 +78,7 @@ export default function SmoothScrollProvider({
       unsubscribersRef.current = [];
       snapInstance.destroy();
       instance.destroy();
-      gsap.ticker.remove(instance.raf);
+      gsap.ticker.remove(tick);
     };
   }, []);
 
@@ -88,14 +89,14 @@ export default function SmoothScrollProvider({
 
   const enableSnap = useCallback(
     (sections?: HTMLElement[]) => {
-      if (!snap) return;
+      if (!snap || !lenis) return;
 
       disableSnap();
 
       const els: HTMLElement[] =
         sections ??
         (Array.from(
-          document.querySelectorAll("[data-snap], .snap-section"),
+          document.querySelectorAll("main > [data-snap]"),
         ) as HTMLElement[]);
 
       if (els.length === 0) return;
@@ -104,8 +105,9 @@ export default function SmoothScrollProvider({
         align: "start",
       });
       unsubscribersRef.current.push(unsub);
+      lenis.resize();
     },
-    [snap, disableSnap],
+    [snap, lenis, disableSnap],
   );
 
   const stopSnap = useCallback(() => {
@@ -118,14 +120,7 @@ export default function SmoothScrollProvider({
 
   return (
     <LenisContext.Provider
-      value={{
-        lenis,
-        snap,
-        enableSnap,
-        disableSnap,
-        stopSnap,
-        startSnap,
-      }}
+      value={{ lenis, snap, enableSnap, disableSnap, stopSnap, startSnap }}
     >
       {children}
     </LenisContext.Provider>
