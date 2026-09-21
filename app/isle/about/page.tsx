@@ -78,7 +78,7 @@ export default function page() {
       </section>
 
       <section data-snap className=" py-[clamp(50px,1vh,240px)]">
-        <FadeInSection className="bg-[#313131] pb-50">
+        <FadeInSection className="bg-[#313131] pb-25">
           <h1 className="big_head translate-x-[10%] translate-y-[-50%] ">
             {t("story_title", "OUR STORY")}
           </h1>
@@ -123,45 +123,35 @@ export default function page() {
         </FadeInSection>
       </section>
 
-      <section data-snap>
-        <FadeInSection className="flex flex-col gap-10">
-          <div className="relative -translate-y-50 w-full flex justify-center h-75 md:h-80">
-            <Image className="absolute h-75 md:h-150 w-fit z-100 hover:opacit-75 duration-300 cursor-pointer" src={"/team/Danidu.png"} width={1138} height={549} alt="" />
-            <Image className="absolute h-75 md:h-150 w-fit z-100 hover:opacit-75 duration-300 cursor-pointer" src={"/team/Spartan.png"} width={1138} height={549} alt="" />
-            <Image className="absolute h-75 md:h-150 w-fit z-100 hover:opacit-75 duration-300 cursor-pointer" src={"/team/Win.png"} width={1138} height={549} alt="" />
-            <Image className="absolute h-75 md:h-150 w-fit z-100 hover:opacit-75 duration-300 cursor-pointer" src={"/team/Akeil.png"} width={1138} height={549} alt="" />
-            <Image className="absolute h-75 md:h-150 w-fit z-100 hover:opacit-75 duration-300 cursor-pointer" src={"/team/Lin.png"} width={1138} height={549} alt="" />
-            <Image className="absolute h-75 md:h-150 w-fit z-100 hover:opacit-75 duration-300 cursor-pointer" src={"/team/Hasal.png"} width={1138} height={549} alt="" />
+      <section data-snap className="py-[clamp(50px,1vh,240px)]">
+        <FadeInSection className="flex flex-col gap-10 w-[80%] m-auto">
+          <div className="text-center">
+            <h1 className="big_head">{t("team_title", "Meet the Isle Outlaws")}</h1>
           </div>
-          <div className="flex flex-col gap-10 w-[80%] m-auto -translate-y-75 md:translate-y-0">
-            <div className="text-center  md:-translate-y-25">
-              <h1 className="big_head">{t("team_title", "Meet the Isle Outlaws")}</h1>
+          <div className="grid grid-cols-2 md:grid-cols-3 m-auto gap-10">
+            <div>
+              <h2 className="sub_head">Akeil Mohideen</h2>
+              <h3 className="sub_head_sm text-red-700">Chief Executive Officer</h3>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 m-auto gap-10">
-              <div>
-                <h2 className="sub_head">Akeil Mohideen</h2>
-                <h3 className="sub_head_sm text-red-700">Chief Executive Officer</h3>
-              </div>
-              <div>
-                <h2 className="sub_head">Win Khant Kyi</h2>
-                <h3 className="sub_head_sm text-red-700">Chief Operational & Creative Officer</h3>
-              </div>
-              <div>
-                <h2 className="sub_head">Lin Kyaw Khant</h2>
-                <h3 className="sub_head_sm text-red-700">Chief Technical Officer</h3>
-              </div>
-              <div>
-                <h2 className="sub_head">Danidu Dileka Perera</h2>
-                <h3 className="sub_head_sm text-red-700">3D Artist</h3>
-              </div>
-              <div>
-                <h2 className="sub_head">Hasal Nauranna</h2>
-                <h3 className="sub_head_sm text-red-700">2D Artist</h3>
-              </div>
-              <div>
-                <h2 className="sub_head">Spartan138</h2>
-                <h3 className="sub_head_sm text-red-700">Music Composer</h3>
-              </div>
+            <div>
+              <h2 className="sub_head">Win Khant Kyi</h2>
+              <h3 className="sub_head_sm text-red-700">Chief Operational & Creative Officer</h3>
+            </div>
+            <div>
+              <h2 className="sub_head">Lin Kyaw Khant</h2>
+              <h3 className="sub_head_sm text-red-700">Chief Technical Officer</h3>
+            </div>
+            <div>
+              <h2 className="sub_head">Danidu Dileka Perera</h2>
+              <h3 className="sub_head_sm text-red-700">3D Artist</h3>
+            </div>
+            <div>
+              <h2 className="sub_head">Hasal Nauranna</h2>
+              <h3 className="sub_head_sm text-red-700">2D Artist</h3>
+            </div>
+            <div>
+              <h2 className="sub_head">Spartan138</h2>
+              <h3 className="sub_head_sm text-red-700">Music Composer</h3>
             </div>
           </div>
         </FadeInSection>
